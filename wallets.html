@@ -7,10 +7,12 @@
     <title>Smart Wallet</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+    
     <link href="./statics/css/styles.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="./statics/css/style-wallets.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
         crossorigin="anonymous"></script>
+    <script src="./statics/js/bootstrap.bundle.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -29,13 +31,7 @@
             me-0 me-md-3
             my-2 my-md-0
           ">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Tìm kiếm..." aria-label="Tìm kiếm..."
-                    aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -104,16 +100,153 @@
 
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
-                    <h1 class="mt-4">Ví của tôi</h1>
-                    <p class="lead">Hãy tạo ví trước và bắt đầu sử dụng</p>
+                <div class="container-fluid px-4" id="header-content">
+                    <div class="container-head">
+                        <h1 class="mt-4">Ví của tôi</h1>
+                        <p class="lead">Hãy tạo ví trước và bắt đầu sử dụng</p>
+                    </div>
+                    <div class="container-btn">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Thêm ví mới
+                          </button>
+                    </div>
+                </div>
+                <div class="container-fluid px-4" id="container-content">
+                    <div class="row justify-content-center " id="main-content-wallet">
+                        <div class="col-8 border border-primary" id="wallet-column">
+                            <div class="wallet-card row">
+                                <div class="wallet-name col">
+                                    <i class="fas fa-piggy-bank" style="color:tomato"></i>
+                                    <strong>Ví tiết kiệm du lịch</strong>
+                                </div>
+                                <div class="wallet-type col text-secondary">
+                                    Tài khoản tiết kiệm
+                                </div>
+                                <div class="wallet-amount col">
+                                    <strong>50.000.000 VND</strong>
+                                </div>
+                            </div>
+                            <div class="wallet-card row">
+                                <div class="wallet-name col">
+                                    <i class="fas fa-money-bill-alt" style="color:Mediumslateblue"></i>
+                                    <strong>Ví thứ 2</strong>
+                                </div>
+                                <div class="wallet-type col text-secondary">
+                                    Tiền mặt
+                                </div>
+                                <div class="wallet-amount col">
+                                    <strong>100.000 VND</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 border border-danger" id="read-column">
+                            <div class="wallet-read">
+                                <div class="search-bar">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" placeholder="Tìm kiếm..."
+                                            aria-label="Tìm kiếm..." aria-describedby="btnNavbarSearch">
+                                        <button class="btn btn-secondary" id="btnNavbarSearch" type="button">
+                                            <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true"
+                                                focusable="false" data-prefix="fas" data-icon="search" role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
+                                                </path>
+                                            </svg><!-- <i class="fas fa-search"></i> Font Awesome fontawesome.com -->
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="filter-container">
+                                    Sort by
+                                    <label class="dropdown">
+
+                                        <div class="dd-button">
+                                          Default
+                                        </div>
+                                      
+                                        <input type="checkbox" class="dd-input" id="test">
+                                      
+                                        <ul class="dd-menu">
+                                          <li>A-Z</li>
+                                          <li>Z-A</li>
+                                          <li>Balance (lowest first)</li>
+                                          <li>Balance (highest first)</li>
+                                        </ul>
+                                        
+                                      </label>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title" id="exampleModalLabel">Thêm ví</h6>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="" class="row" id="form-wallet">
+                      <div class="mb-2 col-8">
+                        <label for="inputWalletName" class="col-sm-2 col-form-label-sm langer-label">Tên ví</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control-sm" placeholder="Tên ví của bạn" id="inputWalletName">
+                        </div>
+                      </div>
+                      <div class="mb-2 col-4 ">
+                        <label for="inputWalletColor" class="col col-form-label-sm">Màu sắc</label>
+                        <div class="col">
+                            <select class="form-select form-select-sm" aria-label="Default select example" id="inputWalletColor">
+                                <option value="1">Đỏ</option>
+                                <option value="2">Nâu</option>
+                                <option value="3">Xanh</option>
+                              </select>
+                        </div>
+                      </div>
+                      <div class="mb-2 ">
+                        <label for="inputWalletType" class="col col-form-label-sm">Loại</label>
+                        <div class="col">
+                            <select class="form-select form-select-sm" aria-label="Default select example" id="inputWalletType">
+                                <option value="1">Tiền mặt</option>
+                                <option value="2">Tiết kiệm</option>
+                                <option value="3">Đầu tư</option>
+                              </select>
+                        </div>
+                      </div>
+                      <div class="mb-2 col-8">
+                        <label for="inputWalletAmount" class="col-form-label-sm langer-label">Số tiền hiện có</label>
+                        <div class="col-sm-10">
+                          <input type="number" class="form-control-sm" placeholder="0" id="inputWalletAmount">
+                        </div>
+                      </div>
+                      <div class="mb-2 col-4 ">
+                        <label for="inputWalletCurrency" class="col col-form-label-sm">Tiền tệ</label>
+                        <div class="col">
+                            <select class="form-select form-select-sm" aria-label="Default select example" id="inputWalletCurrency" disabled>
+                                <option value="1">VND</option>
+                              </select>
+                        </div>
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                  <button type="button" class="btn btn-primary">Lưu</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
         <!-- -------------------------------Static script for running Sidebar --------------------------------- -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script> -->
+        
         <script src="./statics/js/scripts.js"></script>
         <!-- ---------------------------------------------------------------- -->
 </body>
