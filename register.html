@@ -8,21 +8,12 @@
         <meta name="author" content="" />
         <title>Register - SB Admin</title>
         <style>
-            /* html, body {
-                height: 100%;
-                width: 100%;
-            } */
             #error-mes {
                 color: red;
                 font-size: 14px;
                 padding-top: 14px;
             }
-            /* #layoutAuthentication {
-                display: none;
-            }  */
-            /* #layoutAuthentication_content {
-                display: none;
-            } */
+
             #signup-success {
                 display: none;
                 width: 300px;
@@ -30,14 +21,14 @@
                 margin-left: 600px;  
             }
 
-            #signup-success-content {
-               
+            #signup-success-content {  
                height: 300px;
                display: flex;
                flex-direction: column;
                align-items: center;
                justify-content: space-evenly;
             } 
+
             #layoutAuthentication_footer {
                 position: absolute;
                 bottom: 0;
@@ -112,7 +103,6 @@
             <div class="card" id="signup-success">
                 <div class="card-body" id="signup-success-content">
                   <h5 class="card-title">Thanks for signing up</h5>
-                  <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                   <p class="card-text">We have sent a confirmation email to your regitered email. Please check your email to verify your account</p>
                   <img src="https://www.freeiconspng.com/uploads/green-tick-icon-0.png" width="50px" alt="green tick icon" />
                   <a class="btn btn-primary" href ="login.html">Continue to login</a>
@@ -161,10 +151,9 @@
             signUpBtn.addEventListener('click', signUp);
             let signUpLayout = document.getElementById("layoutAuthentication_content");
             let signupSuccess = document.getElementById("signup-success");
-            console.log(signupSuccess);
         
           //signUp function
-          function signUp(){
+            function signUp(){
             let email = document.getElementById("inputEmail").value;
             let password = document.getElementById("inputPassword").value;
             let pwConfirm = document.getElementById("inputPasswordConfirm").value;
@@ -172,17 +161,15 @@
             if(password ===  pwConfirm) { 
                 createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                
-                signUpLayout.style.display = "none";
-                signupSuccess.style.display = "flex";
-                sendEmailVerification(auth.currentUser)
+                   // Signed in 
+                   const user = userCredential.user;
+                   signUpLayout.style.display = "none";
+                   signupSuccess.style.display = "flex";
+                   sendEmailVerification(auth.currentUser)
                    .then(() => {
-                // Email verification sent!
-                // ...
-                console.log("Email verification sent!");
-                });
+                       // Email verification sent!
+                       console.log("Email verification sent!");
+                    });
                 })
                 .catch((error) => {
                 const errorCode = error.code;
@@ -191,9 +178,8 @@
                 });
             } else {
                 errorMes.innerHTML = "Password does not match";
-            }
-            
+            }           
         }
-          </script>
+        </script>
     </body>
 </html>

@@ -99,25 +99,21 @@
             loginBtn.addEventListener('click', login);
           
           //signIn function
-          function login(){
-            let email = document.getElementById("inputEmail").value;
-            let password = document.getElementById("inputPassword").value;
-            signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-              // Signed in 
-              const user = userCredential.user;
-              // ...
-              location.href = 'index.html';
-            //   alert("Signed-in successful")
-            
-
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              errorMes.innerHTML = `${errorMessage}`;
-            });
-          }
+            function login(){
+                let email = document.getElementById("inputEmail").value;
+                let password = document.getElementById("inputPassword").value;
+                signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                   // Signed in 
+                    const user = userCredential.user;
+                    location.href = 'index.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    errorMes.innerHTML = `${errorMessage}`;
+                });
+            }
           </script>
     </body>
 </html>
