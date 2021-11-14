@@ -111,9 +111,9 @@
             </div> 
             <div class="card" id="signup-success">
                 <div class="card-body" id="signup-success-content">
-                  <h5 class="card-title">Success!</h5>
+                  <h5 class="card-title">Thanks for signing up</h5>
                   <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                  <p class="card-text">Your account has been created</p>
+                  <p class="card-text">We have sent a confirmation email to your regitered email. Please check your email to verify your account</p>
                   <img src="https://www.freeiconspng.com/uploads/green-tick-icon-0.png" width="50px" alt="green tick icon" />
                   <a class="btn btn-primary" href ="login.html">Continue to login</a>
                 </div>
@@ -139,7 +139,7 @@
         <script type="module">
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js";
-            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
+            import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
         
             // TODO: Add SDKs for Firebase products that you want to use
             // https://firebase.google.com/docs/web/setup#available-libraries
@@ -177,6 +177,12 @@
                 
                 signUpLayout.style.display = "none";
                 signupSuccess.style.display = "flex";
+                sendEmailVerification(auth.currentUser)
+                   .then(() => {
+                // Email verification sent!
+                // ...
+                console.log("Email verification sent!");
+                });
                 })
                 .catch((error) => {
                 const errorCode = error.code;
@@ -186,6 +192,7 @@
             } else {
                 errorMes.innerHTML = "Password does not match";
             }
+            
         }
           </script>
     </body>
