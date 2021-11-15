@@ -8,6 +8,18 @@
         <meta name="author" content="" />
         <title>Register - SB Admin</title>
         <style>
+            body {
+                background-color:#3cb371!important
+            }
+
+            
+            #app-title {
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px;
+            }
             #error-mes {
                 color: red;
                 font-size: 14px;
@@ -40,10 +52,14 @@
         <link href="./statics/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
+    <body>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
+                    <div id="app-title">
+                        <h1>Smart Wallet</h1>
+                        <img src="https://www.freeiconspng.com/uploads/money-stack-icon-25.png" width="80" alt="Money Stack Icon" />
+                    </div>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
@@ -87,7 +103,7 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" id="signUp" style="width: 250px; margin: auto">Create Account</a></div>
+                                                <div class="d-grid"><a class="btn btn-secondary btn-block" id="signUp" style="width: 250px; margin: auto">Create Account</a></div>
                                             </div>
                                         </form>
                                     </div>
