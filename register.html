@@ -12,7 +12,7 @@
                 background-color:#3cb371!important
             }
 
-            
+
             #app-title {
                 color: white;
                 display: flex;
@@ -28,9 +28,10 @@
 
             #signup-success {
                 display: none;
-                width: 300px;
+                width: 500px;
                 margin-top: 50px;
-                margin-left: 600px;  
+                margin-left: auto;  
+                margin-right: auto;
             }
 
             #signup-success-content {  
@@ -64,7 +65,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Tạo tài khoản</h3></div>
                                     <div class="card-body">
                                         <form>
                                             <!-- <div class="row mb-3">
@@ -89,13 +90,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
-                                                        <label for="inputPassword">Password</label>
+                                                        <label for="inputPassword">Mật khẩu</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
-                                                        <label for="inputPasswordConfirm">Confirm Password</label>
+                                                        <label for="inputPasswordConfirm">Xác nhận mật khẩu</label>
                                                     </div>
                                                 </div>
                                                 <div id="error">
@@ -103,12 +104,12 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-secondary btn-block" id="signUp" style="width: 250px; margin: auto">Create Account</a></div>
+                                                <div class="d-grid"><a class="btn btn-secondary btn-block" id="signUp" style="width: 250px; margin: auto">Tạo tài khoản</a></div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                        <div class="small"><a href="login.html">Bạn đã có tài khoản? Di chuyển đến Đăng ký</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -118,10 +119,10 @@
             </div> 
             <div class="card" id="signup-success">
                 <div class="card-body" id="signup-success-content">
-                  <h5 class="card-title">Thanks for signing up</h5>
-                  <p class="card-text">We have sent a confirmation email to your regitered email. Please check your email to verify your account</p>
+                  <h5 class="card-title">Đăng ký tài khoản thành công</h5>
+                  <p class="card-text">Chúng tôi đã gửi một email xác nhận đến email đã đăng ký. Vui lòng kiểm tra email để xác minh tài khoản của bạn</p>
                   <img src="https://www.freeiconspng.com/uploads/green-tick-icon-0.png" width="50px" alt="green tick icon" />
-                  <a class="btn btn-primary" href ="login.html">Continue to login</a>
+                  <a class="btn btn-primary" href ="login.html">Tiếp tục</a>
                 </div>
             </div>
             <div id="layoutAuthentication_footer">
@@ -193,7 +194,7 @@
                 errorMes.innerHTML = `${errorMessage}`;
                 });
             } else {
-                errorMes.innerHTML = "Password does not match";
+                errorMes.innerHTML = "Mật khâủ không khớp";
             }           
         }
         </script>

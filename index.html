@@ -132,7 +132,7 @@
           </div>
           <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
-            <p id="loginUser">Start Bootstrap</p>
+            <p id="loginUser"></p>
           </div>
         </nav>
       </div>
@@ -332,41 +332,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="./statics/js/datatables-simple-demo.js"></script>
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js";
-      // import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
-      import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-    
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyAhQb16UMv471Z4PPB5UedpdecQ3qYEChM",
-        authDomain: "smartwallet-4f238.firebaseapp.com",
-        projectId: "smartwallet-4f238",
-        storageBucket: "smartwallet-4f238.appspot.com",
-        messagingSenderId: "906540826080",
-        appId: "1:906540826080:web:55fcafdaa8c32900afff85"
-      };
-    
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      let logoutBtn = document.getElementById("logout");
-      logoutBtn.addEventListener('click', logout);
-
-    //signOut fucntion
-    function logout() {
-      signOut(auth).then(() => {
-        location.href = "login.html";
-        localStorage.clear();
-     }).catch((error) => {
-    // An error happened.
-     alert(error); 
-      });
-    }
-    </script>
-    <script src="./src/dashboard.js"></script>
+    <script type="module" src="./src/dashboard.js"></script>
   </body>
 </html>

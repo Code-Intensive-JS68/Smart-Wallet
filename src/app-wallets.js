@@ -125,3 +125,5 @@ $(".submit-new-wallet").click((event) => {
 });
 
 renderWallets();
+
+
