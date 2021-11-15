@@ -14,7 +14,7 @@ const renderWallets = function () {
     .then((data) => {
       data.docs.forEach((element) => {
         const singleWallet = element.data();
-        console.log(singleWallet);
+        //console.log(singleWallet);
         wallets.push(singleWallet);
       });
       createList(wallets, filterBySearchBox);
@@ -30,13 +30,15 @@ const createList = function (wallets, filterBySearchBox) {
   $("#wallet-column").empty();
 
   filteredWallets.forEach((element) => {
-    $(".delete-wallet").on("click", () => {
-        $(".modal-detail").modal('hide');
-        deleteWallet(element);
-    })
+    // $(".delete-wallet").on("click", () => {
+    //     $(".modal-detail").modal('hide');
+    //     deleteWallet(element);
+    // })
     $("#wallet-column").append(
       `
-        <div class="wallet-card row">
+        <div class="wallet-card row" data-bs-toggle="modal" data-bs-target="#modal` +
+        element.walletID +
+        `">
             <div class="wallet-name col">
                 <i class="fas fa-circle" style="color:` +
         element.color +
@@ -49,7 +51,7 @@ const createList = function (wallets, filterBySearchBox) {
         element.type +
         `
             </div>
-            <div class="wallet-amount col" id="wallet-amount">
+            <div class="wallet-amount col">
                 <strong>` +
         element.amount +
         `</strong>
@@ -59,47 +61,105 @@ const createList = function (wallets, filterBySearchBox) {
         element.currency +
         `</strong>
             </div>
-            <div class="wallet-detail-btn col-1">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal` +
-        element.walletID +
-        `">
-            ...
-            </button>
-            </div>
-            <div class="modal fade modal-detail" id="modal` +
+        </div>
+        </div>
+        <div class="modal fade modal-detail" id="modal` +
         element.walletID +
         `" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-header row">
-        <h5 class="modal-title col" id="exampleModalLabel">Thông tin chi tiết ví</h5>
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header row">
+                <h5 class="modal-title col" id="exampleModalLabel">Thông tin chi tiết ví</h5>
 
-        <button type="button" class="update-wallet btn btn-outline-success  col-1" >Sửa</button>
-        <button type="button" class="delete-wallet btn btn-outline-danger  col-1 mx-3" >Xóa</button>
+                <button type="button" class="update-wallet btn btn-outline-success  col-1" data-bs-toggle="collapse" role="button" data-bs-target="#modalDetail` +
+        element.walletID +
+        `" >Sửa</button>
+                <button type="button" class="delete-wallet btn btn-outline-danger col-1 mx-3" onClick="deleteWallet('` +
+        element.walletID +
+        `')" >Xóa</button>
 
+              </div>
+              <div class="modal-body">
+                <div class="collapse" id="modalDetail` +
+        element.walletID +
+        `" >
+                 <div class="card card-body">
+                    <form action="" class="row" id="form-wallet-update">
+                      <div class="mb-2 col-8">
+                       <label for="updateWalletName" class="col-sm-2 col-form-label-sm ">Tên
+                        ví</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control-sm larger-box" placeholder="Tên ví của bạn"
+                      id="updateWalletName`+element.walletID+`">
+                    </div>
+                  </div>
+                  <div class="mb-2 col-4 ">
+                  <label for="updateWalletColor" class="col col-form-label-sm">Màu sắc</label>
+      <div class="col">
+         <input type="color" class="form-select" id="updateWalletColor`+element.walletID+`" value='#1C4E80'>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
   </div>
-        </div>`
+  <div class="mb-2 ">
+      <label for="updateWalletType" class="col col-form-label-sm">Loại</label>
+      <div class="col">
+          <select class="form-select form-select-sm" aria-label="Default select example"
+              id="updateWalletType`+element.walletID+`">
+              <option value="Tiền mặt">Tiền mặt</option>
+              <option value="Tiết kiệm">Tiết kiệm</option>
+              <option value="Đầu tư">Đầu tư</option>
+          </select>
+      </div>
+      <button type="button" class="btn btn-primary update-wallet" id="updateWallet" onClick="updateWallet('` +
+      element.walletID +
+      `  data-bs-toggle="collapse" role="button" data-bs-target="#modalDetail` +
+      element.walletID +
+      `" >Lưu</button>
+
+  </div>
+  </div>
+</div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+        </div>
+      	`
     );
   });
 };
 
-const deleteWallet = function (element){
-    const walletIndex = wallets.findIndex(wallet => wallet.walletID === element.walletID);
-    if(walletIndex != -1){
-        wallets.splice(walletIndex, 1);
-        createList(wallets, filterBySearchBox);
-    }
-    console.log(walletIndex);
+const updateWallet = function (walletID){
+  const updateWallet = {
+    name: $(`#updateWalletName${walletID}`).val(),
+    currency: $(`#updateWalletCurrency${walletID}`).val(),
+    walletID: walletID,
+    color: $(`#updateWalletColor${walletID}`).val(),
+    type: $(`#updateWalletType${walletID}`).val(),
+    amount: $(`#updateWalletAmount${walletID}`).val(),
+  };
+  console.log(updateWallet);
+  db.collection("wallets").doc(walletID).update(updateWallet).then(() => {
+    createList(wallets, filterBySearchBox);
+  })
 }
+
+const deleteWallet = function (walletID) {
+  db.collection("wallets")
+    .doc(walletID)
+    .delete()
+    .then(() => {
+      const walletIndex = wallets.findIndex(
+        (wallet) => wallet.walletID === walletID
+      );
+      if (walletIndex != -1) {
+        wallets.splice(walletIndex, 1);
+        $(`#modal${walletID}`).modal("hide");
+        createList(wallets, filterBySearchBox);
+      }
+    });
+};
+
 
 $(".submit-new-wallet").click((event) => {
   event.preventDefault();
@@ -123,5 +183,4 @@ $(".submit-new-wallet").click((event) => {
       console.error("Error occured", err);
     });
 });
-
 renderWallets();

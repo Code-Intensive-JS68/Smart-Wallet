@@ -10,12 +10,17 @@
     background-color: #eff0f2;
   }
   .wallet-card{
+    border: 1px solid white;
     display: flex;
     background-color: white;
     align-items: center;
     padding:0.5rem;
     margin: 1rem 0rem;
     justify-content: space-between;
+  }
+  .wallet-card:hover{
+    cursor: pointer;
+    border: 1px solid black;
   }
   .search-bar{
     padding:0.5rem;
