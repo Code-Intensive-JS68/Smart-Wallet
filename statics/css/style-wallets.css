@@ -119,6 +119,7 @@
 #form-wallet{
     display: flex;
 }
-.modal-body input {
+.modal-body  .larger-box {
     width: 120%;
+    border: 1px solid #ced4da;
 }
