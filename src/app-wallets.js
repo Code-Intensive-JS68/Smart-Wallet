@@ -31,7 +31,7 @@ const createList = function (wallets, filterBySearchBox) {
 
   filteredWallets.forEach((element) => {
     $(".delete-wallet").on("click", () => {
-        $(`#`+element.id).modal('hide');
+        $(".modal-detail").modal('hide');
         deleteWallet(element);
     })
     $("#wallet-column").append(
@@ -60,13 +60,13 @@ const createList = function (wallets, filterBySearchBox) {
         `</strong>
             </div>
             <div class="wallet-detail-btn col-1">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="` +
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal` +
         element.walletID +
         `">
             ...
             </button>
             </div>
-            <div class="modal fade" id="` +
+            <div class="modal fade modal-detail" id="modal` +
         element.walletID +
         `" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -98,6 +98,7 @@ const deleteWallet = function (element){
         wallets.splice(walletIndex, 1);
         createList(wallets, filterBySearchBox);
     }
+    console.log(walletIndex);
 }
 
 $(".submit-new-wallet").click((event) => {

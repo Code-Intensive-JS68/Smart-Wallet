@@ -123,3 +123,6 @@
     width: 120%;
     border: 1px solid #ced4da;
 }
+.modal-content .modal-header{
+  border-bottom: none;
+}
