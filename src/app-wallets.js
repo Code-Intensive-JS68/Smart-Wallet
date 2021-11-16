@@ -1,5 +1,5 @@
 let wallets = [];
-
+let userUID = "uid-test";
 const filterBySearchBox = {
   searchText: "",
 };
@@ -71,7 +71,7 @@ const createList = function (wallets, filterBySearchBox) {
               <div class="modal-header row">
                 <h5 class="modal-title col" id="exampleModalLabel">Thông tin chi tiết ví</h5>
 
-                <button type="button" class="update-wallet btn btn-outline-success  col-1" data-bs-toggle="collapse" role="button" data-bs-target="#modalDetail` +
+                <button type="button" class="update-wallet btn btn-outline-success  col-1" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
         element.walletID +
         `" >Sửa</button>
                 <button type="button" class="delete-wallet btn btn-outline-danger col-1 mx-3" onClick="deleteWallet('` +
@@ -80,7 +80,7 @@ const createList = function (wallets, filterBySearchBox) {
 
               </div>
               <div class="modal-body">
-                <div class="collapse" id="modalDetail` +
+                <div class="collapse" id="modalUpdate` +
         element.walletID +
         `" >
                  <div class="card card-body">
@@ -109,11 +109,11 @@ const createList = function (wallets, filterBySearchBox) {
               <option value="Đầu tư">Đầu tư</option>
           </select>
       </div>
-      <button type="button" class="btn btn-primary update-wallet" id="updateWallet" onClick="updateWallet('` +
+      <button type="button" class="btn btn-primary update-wallet" onclick="updateWallet('` +
       element.walletID +
-      `  data-bs-toggle="collapse" role="button" data-bs-target="#modalDetail` +
+      `')" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
       element.walletID +
-      `" >Lưu</button>
+      ` " >Lưu</button>
 
   </div>
   </div>
@@ -121,28 +121,30 @@ const createList = function (wallets, filterBySearchBox) {
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
               </div>
         </div>
       	`
     );
   });
 };
-
-const updateWallet = function (walletID){
+  
+function updateWallet(walletID){
   const updateWallet = {
-    name: $(`#updateWalletName${walletID}`).val(),
-    currency: $(`#updateWalletCurrency${walletID}`).val(),
-    walletID: walletID,
-    color: $(`#updateWalletColor${walletID}`).val(),
-    type: $(`#updateWalletType${walletID}`).val(),
-    amount: $(`#updateWalletAmount${walletID}`).val(),
-  };
-  console.log(updateWallet);
-  db.collection("wallets").doc(walletID).update(updateWallet).then(() => {
-    createList(wallets, filterBySearchBox);
-  })
+      name: $(`#updateWalletName${walletID}`).val(),
+      color: $(`#updateWalletColor${walletID}`).val(),
+      type: $(`#updateWalletType${walletID}`).val(),
+    };
+  db.collection("wallets")
+  .doc(walletID)
+  .update(updateWallet)
+  .then(() => {
+        $(`#modal${walletID}`).modal("hide");
+        createList(wallets, filterBySearchBox);
+        window.location.reload();
+    })
 }
+ 
+
 
 const deleteWallet = function (walletID) {
   db.collection("wallets")
@@ -165,6 +167,7 @@ $(".submit-new-wallet").click((event) => {
   event.preventDefault();
   const walletID = uuidv4();
   const wallet = {
+    userUID: userUID,
     name: $(".input-wallet-name").val(),
     currency: $(".input-wallet-currency").val(),
     walletID: walletID,
@@ -183,4 +186,4 @@ $(".submit-new-wallet").click((event) => {
       console.error("Error occured", err);
     });
 });
-renderWallets();
+renderWallets()
