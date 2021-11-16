@@ -1,5 +1,7 @@
 let wallets = [];
-let userUID = "uid-test";
+
+
+
 const filterBySearchBox = {
   searchText: "",
 };
@@ -109,11 +111,13 @@ const createList = function (wallets, filterBySearchBox) {
               <option value="Đầu tư">Đầu tư</option>
           </select>
       </div>
+      <div class="row mt-3 mx-1">
       <button type="button" class="btn btn-primary update-wallet" onclick="updateWallet('` +
       element.walletID +
       `')" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
       element.walletID +
       ` " >Lưu</button>
+      </div>
 
   </div>
   </div>
@@ -167,7 +171,7 @@ $(".submit-new-wallet").click((event) => {
   event.preventDefault();
   const walletID = uuidv4();
   const wallet = {
-    userUID: userUID,
+    userID: firebase.auth().currentUser.uid,
     name: $(".input-wallet-name").val(),
     currency: $(".input-wallet-currency").val(),
     walletID: walletID,
@@ -186,11 +190,4 @@ $(".submit-new-wallet").click((event) => {
       console.error("Error occured", err);
     });
 });
-<<<<<<< HEAD
 renderWallets()
-=======
-
-renderWallets();
-
-
->>>>>>> a09f8a916304db0c0aad5d1894c16a2171759fb5

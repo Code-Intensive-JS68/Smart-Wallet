@@ -19,6 +19,9 @@
         </style>
         <link href="./statics/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="./statics/js/bootstrap.bundle.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -208,7 +211,24 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="./statics/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="./statics/assets/demo/chart-area-demo.js"></script>
+        <!-- <script src="./statics/assets/demo/chart-area-demo.js"></script> -->
+        <script >
+          const firebaseConfig = {
+              apiKey: "AIzaSyAhQb16UMv471Z4PPB5UedpdecQ3qYEChM",
+              authDomain: "smartwallet-4f238.firebaseapp.com",
+              projectId: "smartwallet-4f238",
+              storageBucket: "smartwallet-4f238.appspot.com",
+              messagingSenderId: "906540826080",
+              appId: "1:906540826080:web:55fcafdaa8c32900afff85"
+          };
+
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          const db = firebase.firestore()
+      </script>
+      <!-- ---------------------------------------------------------------- -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="./statics/assets/demo/chart-bar-demo.js"></script>
         <script src="./statics/assets/demo/chart-pie-demo.js"></script>
         <script type="module" src="./src/report.js"></script>
