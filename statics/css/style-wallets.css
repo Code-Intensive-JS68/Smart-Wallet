@@ -10,12 +10,17 @@
     background-color: #eff0f2;
   }
   .wallet-card{
+    border: 1px solid white;
     display: flex;
     background-color: white;
     align-items: center;
     padding:0.5rem;
     margin: 1rem 0rem;
     justify-content: space-between;
+  }
+  .wallet-card:hover{
+    cursor: pointer;
+    border: 1px solid black;
   }
   .search-bar{
     padding:0.5rem;
@@ -119,6 +124,10 @@
 #form-wallet{
     display: flex;
 }
-.modal-body input {
+.modal-body  .larger-box {
     width: 120%;
+    border: 1px solid #ced4da;
+}
+.modal-content .modal-header{
+  border-bottom: none;
 }
