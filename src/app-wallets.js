@@ -186,4 +186,11 @@ $(".submit-new-wallet").click((event) => {
       console.error("Error occured", err);
     });
 });
+<<<<<<< HEAD
 renderWallets()
+=======
+
+renderWallets();
+
+
+>>>>>>> a09f8a916304db0c0aad5d1894c16a2171759fb5
