@@ -1,4 +1,21 @@
+
+
 let wallets = [];
+
+firebase.auth().onAuthStateChanged(() => {
+  this.currentUser = firebase.auth().currentUser.uid;
+  console.log(currentUser);
+  db.collection("wallets").where("userID","==", currentUser)
+    .get()
+    .then((data) => {
+      data.docs.forEach((element) => {
+        const singleWallet = element.data();
+        //console.log(singleWallet);
+        wallets.push(singleWallet);
+      });
+      createList(wallets, filterBySearchBox);
+    });
+})
 
 
 
@@ -10,18 +27,19 @@ $("#wallet-search").on("input", () => {
   createList(wallets, filterBySearchBox);
 });
 
-const renderWallets = function () {
-  db.collection("wallets")
-    .get()
-    .then((data) => {
-      data.docs.forEach((element) => {
-        const singleWallet = element.data();
-        //console.log(singleWallet);
-        wallets.push(singleWallet);
-      });
-      createList(wallets, filterBySearchBox);
-    });
-};
+
+// const renderWallets = function () {
+//   db.collection("wallets")
+//     .get()
+//     .then((data) => {
+//       data.docs.forEach((element) => {
+//         const singleWallet = element.data();
+//         //console.log(singleWallet);
+//         wallets.push(singleWallet);
+//       });
+//       createList(wallets, filterBySearchBox);
+//     });
+// };
 
 const createList = function (wallets, filterBySearchBox) {
   const filteredWallets = $.grep(wallets, (element) => {
@@ -190,4 +208,4 @@ $(".submit-new-wallet").click((event) => {
       console.error("Error occured", err);
     });
 });
-renderWallets()
+// renderWallets()
