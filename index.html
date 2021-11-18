@@ -21,6 +21,9 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   </head>
 
   <body class="sb-nav-fixed">
@@ -250,10 +253,10 @@
                 <div class="card mb-4">
                   <div class="card-header">
                     <i class="fas fa-chart-bar me-1"></i>
-                    Thu nhập ròng
+                    Tổng chi tiêu 2021
                   </div>
                   <div class="card-body">
-                    <canvas id="myBarChart" width="100%" height="40"></canvas>
+                    <canvas id="BarChart" width="100%" height="40"></canvas>
                   </div>
                 </div>
               </div>
@@ -321,12 +324,29 @@
       crossorigin="anonymous"
     ></script>
     <script src="./statics/js/scripts.js"></script>
+    
+   <!-- ------------------------------Firebase SDK---------------------------------- -->
+   <script >
+    const firebaseConfig = {
+        apiKey: "AIzaSyAhQb16UMv471Z4PPB5UedpdecQ3qYEChM",
+        authDomain: "smartwallet-4f238.firebaseapp.com",
+        projectId: "smartwallet-4f238",
+        storageBucket: "smartwallet-4f238.appspot.com",
+        messagingSenderId: "906540826080",
+        appId: "1:906540826080:web:55fcafdaa8c32900afff85"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore()
+</script>
+<!-- ---------------------------------------------------------------- -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
       crossorigin="anonymous"
     ></script>
     <script src="./statics/assets/demo/chart-area-demo.js"></script>
-    <script src="./statics/assets/demo/chart-bar-demo.js"></script>
+    <!-- <script src="./statics/assets/demo/chart-bar-demo.js"></script> -->
     <script
       src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
       crossorigin="anonymous"
