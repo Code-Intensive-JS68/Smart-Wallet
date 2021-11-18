@@ -1,0 +1,496 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    overflow: hidden;
+
+}
+
+.transaction {
+    padding-top: 80px;
+    padding-left: 40px;
+
+}
+.top-transaction {
+    width: 100vw;
+    height: 40px;
+    position: relative;
+
+}
+
+.header-transaction {
+    font-size: 30px;
+    position: absolute;
+    left: 20%;
+    bottom: 5px;
+}
+
+.add-transaction {
+    line-height: 30px;
+    height: 50px;
+    border-radius: 25px;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 20px;
+    border: 1px solid #e5e9ed;
+    background-color: #009688;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+}
+
+.transaction-history {
+    width: 90%;
+    height: 80%;
+    background-color: #eff0f2;
+    border-radius: 5px;
+    overflow-y: scroll;
+    border: 1px solid #009688;
+    padding: 30px;
+}
+
+.transaction-child {
+    background-color:#fff;
+    margin: 0px 0 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    border: 1px solid #e5e9ed;
+    width: 100%;
+}
+
+.transaction-child:hover {
+    border-color: #3ba71a;
+}
+
+.type-transaction {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    max-width: 300px;
+}
+
+.category-transaction {
+    color: #000;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.amount {
+    position: relative;
+}
+
+.amount::before {
+    content: "vnđ";
+    position: absolute;
+    right: -40px;
+}
+
+.amount.expense {
+    color:#f04e56;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.amount.expense:after {
+    position: absolute;
+    content: "-";
+    color:#f04e56;
+    font-size: 20px;
+    font-weight: 600;
+    left: -15px;
+}
+
+.date-transaction {
+    font-size: 20px;
+    font-weight: 600;
+    color:#909194
+    
+}
+
+.amount.revenue {
+    color:#3ba71a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.amount.revenue::after {
+    position: absolute;
+    content: "+";
+    color:#3ba71a;
+    font-size: 20px;
+    font-weight: 600;
+    left: -15px;
+}
+
+.icon-transaction {
+    font-size: 22px;
+}
+
+.note-transaction {
+    font-size: 22px;
+}
+
+.note-transaction:hover {
+    cursor: pointer;
+}
+/* Modal */
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgb(0, 0, 0, 0.4);
+    display: none;
+}
+
+.modal.open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container {
+    margin: 30px auto;
+    background-color: #fff;
+    width: 800px;
+    height: 560px;
+    border-radius: 20px;
+    animation: modalFadeIn ease 0.5s;
+    overflow: hidden;
+}
+
+.modal-close {
+    height: 46px;
+    width: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 15px;
+}
+
+.modal-close:hover {
+    color: rgb(240, 122, 122);
+    cursor: pointer;
+
+}
+
+.modal-header {
+    background-color:  #009688;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: 4px;
+    box-sizing: border-box;
+}
+
+.modal-body{
+background-color: #fff;
+padding: 0.15px 16px;
+}
+
+.modal-label{
+    display: block;
+    margin: 15px;
+    font-size: 15px;
+}
+
+.modal-input{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc!important;
+}
+
+.save-trans{
+    background-color: #009688;
+    height: 54px;
+    width: 100%;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    text-transform: uppercase;
+    margin: 16px 0px;
+    font-weight: 500;
+}
+
+
+@keyframes modalFadeIn {
+    from {
+    opacity: 0;
+    transform: translateY(-150px);
+    } to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+}
+
+/* select date */
+
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+label,
+select-time {
+    margin: 15px;
+}
+
+input {
+    border-color:transparent;
+}
+
+/* Modal info */
+
+.modal-info {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgb(0, 0, 0, 0.4);
+    display: none;
+}
+
+.modal-info.open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-info-container {
+    margin: 70px auto 0 auto;
+    background-color: #fff;
+    width: 800px;
+    height: 530px;
+    border-radius: 20px;
+    animation: modalFadeIn ease 0.5s;
+    overflow: hidden;
+    position: absolute;
+}
+
+.modal-info-close {
+    height: 46px;
+    width: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 15px;
+}
+
+.modal-info-close:hover {
+    color: rgb(240, 122, 122);
+    cursor: pointer;
+
+}
+
+.modal-info-header {
+    background-color:  #009688;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: 4px;
+    box-sizing: border-box;
+}
+
+.modal-info-body{
+background-color: #fff;
+padding: 0.15px 16px;
+}
+
+.modal-info-label{
+    display: block;
+    margin: 15px;
+    font-size: 15px;
+}
+
+.modal-info-input{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc!important;
+}
+
+
+.container-info {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.update-icon {
+    position: absolute; 
+    top: -30px;
+    right: 50px;
+    width: 40px;
+    font-size: 20px;
+}
+
+.update-icon:hover {
+    color: #f04e56;
+    cursor: pointer;
+    transform: scale(1.6,1.6);
+}
+
+.modal-note {
+    color: #000;
+    font-size: 20px;
+}
+
+.info-trans {
+    color:#009688;
+    font-size: 30px;
+    font-weight: 600;
+    padding-left: 50px;
+    overflow: auto;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+}
+
+
+.info-trans::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }
+.info-amount::after {
+    content: "vnđ";
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.info-note {
+    padding-bottom: 30px;
+    font-size: 15px;
+    max-width:750px;
+    font-weight: 500;
+    line-height: 20px;
+    max-height: 90px;
+    overflow-y: scroll;
+    display: block;
+}
+
+
+/* Modal update */
+.modal-update  {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+.modal-update-container {
+    margin: 70px auto 0 auto;
+    background-color: #fff;
+    width: 800px;
+    height: 530px;
+    border-radius: 20px;
+    animation: modalFadeIn ease 0.5s;
+    overflow: hidden;
+    position: relative;
+}
+
+.modal-update.open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-update-close {
+    height: 46px;
+    width: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 15px;
+}
+
+.modal-update-close:hover {
+    color: rgb(240, 122, 122);
+    cursor: pointer;
+
+}
+
+.modal-update-header {
+    background-color:  #009688;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: 4px;
+    box-sizing: border-box;
+}
+
+.modal-update-body{
+background-color: #fff;
+padding: 0.15px 16px;
+}
+
+.modal-update-label{
+    display: block;
+    margin: 15px;
+    font-size: 15px;
+}
+
+.modal-update-input{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc!important;
+}
+
+
+.container-update {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.save-update {
+    background-color: #009688;
+    height: 45px;
+    width: 80%;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 20;
+    font-weight: 500;
+    left: 75px;
+}
+

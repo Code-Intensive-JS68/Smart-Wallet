@@ -1,15 +1,11 @@
-let wallets = [];
-let userUID = "uid-test";
-const filterBySearchBox = {
-  searchText: "",
-};
-$("#wallet-search").on("input", () => {
-  filterBySearchBox.searchText = $("#wallet-search").val();
-  createList(wallets, filterBySearchBox);
-});
 
-const renderWallets = function () {
-  db.collection("wallets")
+
+let wallets = [];
+
+firebase.auth().onAuthStateChanged(() => {
+  this.currentUser = firebase.auth().currentUser.uid;
+  console.log(currentUser);
+  db.collection("wallets").where("userID","==", currentUser)
     .get()
     .then((data) => {
       data.docs.forEach((element) => {
@@ -19,7 +15,31 @@ const renderWallets = function () {
       });
       createList(wallets, filterBySearchBox);
     });
+})
+
+
+
+const filterBySearchBox = {
+  searchText: "",
 };
+$("#wallet-search").on("input", () => {
+  filterBySearchBox.searchText = $("#wallet-search").val();
+  createList(wallets, filterBySearchBox);
+});
+
+
+// const renderWallets = function () {
+//   db.collection("wallets")
+//     .get()
+//     .then((data) => {
+//       data.docs.forEach((element) => {
+//         const singleWallet = element.data();
+//         //console.log(singleWallet);
+//         wallets.push(singleWallet);
+//       });
+//       createList(wallets, filterBySearchBox);
+//     });
+// };
 
 const createList = function (wallets, filterBySearchBox) {
   const filteredWallets = $.grep(wallets, (element) => {
@@ -109,11 +129,13 @@ const createList = function (wallets, filterBySearchBox) {
               <option value="Đầu tư">Đầu tư</option>
           </select>
       </div>
+      <div class="row mt-3 mx-1">
       <button type="button" class="btn btn-primary update-wallet" onclick="updateWallet('` +
       element.walletID +
       `')" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
       element.walletID +
       ` " >Lưu</button>
+      </div>
 
   </div>
   </div>
@@ -167,7 +189,7 @@ $(".submit-new-wallet").click((event) => {
   event.preventDefault();
   const walletID = uuidv4();
   const wallet = {
-    userUID: userUID,
+    userID: firebase.auth().currentUser.uid,
     name: $(".input-wallet-name").val(),
     currency: $(".input-wallet-currency").val(),
     walletID: walletID,
