@@ -1,13 +1,43 @@
 
-const logTransactions = async () => {
-  let transactionsRef = db.collection('transaction');
-  let allTransactions = await transactionsRef.get();
-  for (const doc of allTransactions.docs) {
+// const logTransactions = async () => {
+//   let transactionsRef = db.collection('transaction').where("userID","==", firebase.auth().currentUser.uid);
+//   let allTransactions = await transactionsRef.get();
+//   for (const doc of allTransactions.docs) {
 
-     console.log(doc.data());
-  }
-}
-logTransactions();
+//      console.log(doc.data());
+//   }
+// }
+// logTransactions();
+let transactionsPie = [];
+let transactionAmount = [];
+let transactionCategory = [];
+
+  db.collection("transaction").where("walletID","==", 1)
+    .get()
+    .then((data) => {
+      data.docs.forEach((element) => {
+        var myPieChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: transactionCategory ,
+    datasets: [{
+      data: transactionAmount,
+      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745', '#007bff', '#dc3545', '#ffc107', '#28a745'],
+    }],
+  },
+});
+        const singleTrans = element.data();
+        //console.log(singleWallet);
+        transactionsPie.push(singleTrans);
+       for (let i =0; i < transactionsPie.length; ++i) {
+         transactionAmount.push(Number(transactionsPie[i].amount));
+         transactionCategory.push(transactionsPie[i].category);
+       }
+      });
+    });
+console.log(transactionsPie);
+console.log(transactionAmount)
+console.log(transactionCategory)
 
 let data = [10, 20, 40, 80, 80];
 let labels = ["food", "cafe", "travel", "shopping", "shopping"];
@@ -17,15 +47,16 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: labels ,
-    datasets: [{
-      data: data,
-      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
-    }],
-  },
-});
+
+// var myPieChart = new Chart(ctx, {
+//   type: 'pie',
+//   data: {
+//     labels: transactionCategory ,
+//     datasets: [{
+//       data: transactionAmount,
+//       backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745', '#007bff', '#dc3545', '#ffc107', '#28a745'],
+//     }],
+//   },
+// });
 
 

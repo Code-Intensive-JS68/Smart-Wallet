@@ -4,13 +4,11 @@ let wallets = [];
 
 firebase.auth().onAuthStateChanged(() => {
   this.currentUser = firebase.auth().currentUser.uid;
-  console.log(currentUser);
   db.collection("wallets").where("userID","==", currentUser)
     .get()
     .then((data) => {
       data.docs.forEach((element) => {
         const singleWallet = element.data();
-        //console.log(singleWallet);
         wallets.push(singleWallet);
       });
       createList(wallets, filterBySearchBox);
@@ -28,19 +26,6 @@ $("#wallet-search").on("input", () => {
 });
 
 
-// const renderWallets = function () {
-//   db.collection("wallets")
-//     .get()
-//     .then((data) => {
-//       data.docs.forEach((element) => {
-//         const singleWallet = element.data();
-//         //console.log(singleWallet);
-//         wallets.push(singleWallet);
-//       });
-//       createList(wallets, filterBySearchBox);
-//     });
-// };
-
 const createList = function (wallets, filterBySearchBox) {
   const filteredWallets = $.grep(wallets, (element) => {
     return element.name
@@ -50,10 +35,7 @@ const createList = function (wallets, filterBySearchBox) {
   $("#wallet-column").empty();
 
   filteredWallets.forEach((element) => {
-    // $(".delete-wallet").on("click", () => {
-    //     $(".modal-detail").modal('hide');
-    //     deleteWallet(element);
-    // })
+
     $("#wallet-column").append(
       `
         <div class="wallet-card row" data-bs-toggle="modal" data-bs-target="#modal` +
@@ -109,14 +91,14 @@ const createList = function (wallets, filterBySearchBox) {
                        <label for="updateWalletName" class="col-sm-2 col-form-label-sm ">Tên
                         ví</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control-sm larger-box" placeholder="Tên ví của bạn"
-                      id="updateWalletName`+element.walletID+`">
+                      <input type="text" class="form-control-sm larger-box" placeholder="`+element.name+`"
+                      id="updateWalletName`+element.walletID+` value="`+element.name+`">
                     </div>
                   </div>
                   <div class="mb-2 col-4 ">
                   <label for="updateWalletColor" class="col col-form-label-sm">Màu sắc</label>
       <div class="col">
-         <input type="color" class="form-select" id="updateWalletColor`+element.walletID+`" value='#1C4E80'>
+         <input type="color" class="form-select"  value="`+element.color+`" id="updateWalletColor`+element.walletID+`">
       </div>
   </div>
   <div class="mb-2 ">
@@ -124,9 +106,12 @@ const createList = function (wallets, filterBySearchBox) {
       <div class="col">
           <select class="form-select form-select-sm" aria-label="Default select example"
               id="updateWalletType`+element.walletID+`">
+              <option value="`+element.type+`" selected">`+element.type+`</option>
               <option value="Tiền mặt">Tiền mặt</option>
               <option value="Tiết kiệm">Tiết kiệm</option>
               <option value="Đầu tư">Đầu tư</option>
+              <option value="Chi tiêu cần thiết">Chi tiêu cần thiết</option>
+              <option value="Từ thiện">Từ thiện</option>
           </select>
       </div>
       <div class="row mt-3 mx-1">
@@ -208,4 +193,3 @@ $(".submit-new-wallet").click((event) => {
       console.error("Error occured", err);
     });
 });
-// renderWallets()
