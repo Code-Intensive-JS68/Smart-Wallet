@@ -1,13 +1,12 @@
+var filterBtn = document.getElementById("filter-btn");
 
-// const logTransactions = async () => {
-//   let transactionsRef = db.collection('transaction').where("userID","==", firebase.auth().currentUser.uid);
-//   let allTransactions = await transactionsRef.get();
-//   for (const doc of allTransactions.docs) {
+filterBtn.addEventListener("click", renderResult);
+function renderResult() {
+let walletSelect = $("#list-wallet").val();
 
-//      console.log(doc.data());
-//   }
-// }
-// logTransactions();
+  console.log(walletSelect);
+}
+
 let transactionsPie = [];
 let transactionAmount = [];
 let transactionCategory = [];
