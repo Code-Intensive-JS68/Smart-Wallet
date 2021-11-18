@@ -18,20 +18,22 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const loginUser = document.getElementById('loginUser');
+    
     //Get current signed in user
     onAuthStateChanged(auth, (user) => {
-    if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        const email = user.email;
-        console.log(uid);
-        loginUser.innerHTML = `${email}`
-        } 
-    });
-       
+            if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+                var uid = user.uid;
+                var email = user.email;
+                console.log(uid);
+                loginUser.innerHTML = `${email}`            
+                } 
+            });
+    
     let logoutBtn = document.getElementById("logout");
     logoutBtn.addEventListener('click', logout);
+    
 
     //signOut fucntion
     function logout() {
@@ -42,6 +44,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
      alert(error); 
       });
     }
+
 
     
 

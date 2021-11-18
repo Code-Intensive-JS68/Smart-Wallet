@@ -2,6 +2,14 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
+var expense = [4215000, 5312000, 6251000, 7841000, 9821000, 14984000, 0, 0, 0, 0, 0, 0];
+//click vào button, run renderChart
+function renderChart() {
+  //get walletID tương ứng vs tên ví
+  //tất cả transaction của walletID
+  //nếu month = 1 cộng dồn số tiền
+  //push vào expense
+}
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
@@ -12,7 +20,7 @@ var myLineChart = new Chart(ctx, {
       label: "Expense",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [4215000, 5312000, 6251000, 7841000, 9821000, 14984000, 0, 0, 0, 0, 0, 0],
+      data: expense,
     }],
   },
   options: {
