@@ -8,10 +8,22 @@
         <meta name="author" content="" />
         <title>Charts - SB Admin</title>
         <style>
-            #select-wallet {
+            #select {
+                display: flex;
+                justify-content: space-evenly;
                 padding-top: 20px;
-                padding-bottom: 50px;
+                padding-bottom: 20px;
+            }
+            #select-wallet {     
                 width: 200px;
+            }
+            #select-year {
+                width: 200px;
+            }
+            #filter {
+                display: flex;
+                justify-content: center;
+                padding-bottom: 40px;
             }
             #filter-btn {
                 margin-top: 20px;
@@ -106,7 +118,7 @@
                       </div>
                       Ví của tôi
                     </a>
-                    <a class="nav-link" href="records.html">
+                    <a class="nav-link" href="transaction.html">
                       <div class="sb-nav-link-icon">
                         <i class="fas fa-chart-area"></i>
                       </div>
@@ -153,16 +165,29 @@
                                 .
                             </div>
                         </div> -->
+                        <div id="select">
                         <div id="select-wallet">
                           <h5>Chọn ví</h5>
-                          <select class="form-select" aria-label="Default select example">
-                            <option selected>Ví 1</option>
-                            <option value="1">Ví 2</option>
-                            <option value="2">Ví 3</option>
-                            <option value="3">Ví 4</option>
+                          <select id="list-wallet" class="form-select" aria-label="Default select example">
                           </select>
-                          <button type="button" class="btn btn-primary" id="filter-btn">Hiển thị báo cáo</button>
                         </div>
+
+                        <div id="select-year">
+                            <h5>Chọn thời gian</h5>
+                            <select id="list-year" class="form-select" aria-label="Default select example">
+                                <option value= 2021>2021</option>
+                                <option value= 2020>2020</option>
+                                <option value= 2019>2019</option>
+                                <option value= 2018>2018</option>
+                            </select>
+                        </div>
+                        </div>
+                        <div id="filter">
+                            <button type="button" class="btn btn-primary" id="filter-btn">Hiển thị báo cáo</button>
+                        </div>
+
+                        
+                        
                         
                         <!-- <div class="card mb-4">
                             <div class="card-header">
@@ -231,7 +256,7 @@
       <!-- ---------------------------------------------------------------- -->
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="./statics/assets/demo/chart-bar-demo.js"></script>
+        <script type="module" src="./statics/assets/demo/chart-bar-demo.js"></script>
         <script src="./statics/assets/demo/chart-pie-demo.js"></script>
         <script type="module" src="./src/report.js"></script>
     </body>
