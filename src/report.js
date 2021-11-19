@@ -133,8 +133,8 @@ function renderResult() {
         labels: [`1/${year}`, `2/${year}`, `3/${year}`, `4/${year}`, `5/${year}`, `6/${year}`, `7/${year}`, `8/${year}`, `9/${year}`, `10/${year}`, `11/${year}`, `12/${year}`],
         datasets: [{
           label: "Expense",
-          backgroundColor: "rgba(2,117,216,1)",
-          borderColor: "rgba(2,117,216,1)",
+          backgroundColor: "#219173",
+          borderColor: "#219173",
           data: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec],
         }],
       },

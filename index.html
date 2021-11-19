@@ -15,6 +15,14 @@
       rel="stylesheet"
     />
     <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+    <style>
+      .card-footer {
+        background-color: #218173!important;
+      }
+      .card-wallet {
+        background-color: #7EC7AE!important;
+      }
+    </style>
     <link href="./statics/css/styles.css" rel="stylesheet" />
 
     <script
@@ -84,7 +92,7 @@
             <li>
               <hr class="dropdown-divider" />
             </li>
-            <li><a  class="btn btn-primary" id="logout" style="margin: 20px">Đăng xuất</a></li>
+            <li><a  class="btn btn-dark" id="logout" style="margin: 20px">Đăng xuất</a></li>
           </ul>
         </li>
       </ul>
@@ -144,11 +152,11 @@
           <div class="container-fluid px-4">
             <h1 class="mt-4">Dashboard</h1>
             <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item active">Welcome back,</li>
             </ol>
             <div class="row">
               <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
+                <div class="card-wallet text-white mb-4">
                   <div class="card-body">
                     <div>Ví 1</div>
                     <div>500,000đ</div>
@@ -171,7 +179,7 @@
                 </div>
               </div>
               <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
+                <div class="card-wallet text-white mb-4">
                   <div class="card-body">
                     <div>Ví 2</div>
                     <div>500,000đ</div>
@@ -194,7 +202,7 @@
                 </div>
               </div>
               <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
+                <div class="card-wallet text-white mb-4">
                   <div class="card-body">
                     <div>Ví 3</div>
                     <div>500,000đ</div>
@@ -217,8 +225,12 @@
                 </div>
               </div>
               <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                  <div class="card-body">Ví 4</div>
+                <div class="card-wallet text-white mb-4">
+                  <div class="card-body">
+                    <div>Ví 4</div>
+                    <div>500,000đ</div>
+                  </div>
+
                   <div
                     class="
                       card-footer
