@@ -224,3 +224,31 @@ $(".submit-new-wallet").click((event) => {
       console.error("Error occured", err);
     });
 });
+
+
+//Sign out etc...
+    const loginUser = document.getElementById('loginUser');
+    //Get current signed in user
+    firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        const email = user.email;
+        console.log(uid);
+        loginUser.innerHTML = `${email}`
+        } 
+    });
+       
+    let logoutBtn = document.getElementById("logout");
+    logoutBtn.addEventListener('click', logout);
+
+    //signOut fucntion
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        location.href = "login.html";
+     }).catch((error) => {
+    // An error happened.
+       alert(error); 
+      });
+    }

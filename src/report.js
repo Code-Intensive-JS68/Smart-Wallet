@@ -1,49 +1,32 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-          
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAhQb16UMv471Z4PPB5UedpdecQ3qYEChM",
-        authDomain: "smartwallet-4f238.firebaseapp.com",
-        projectId: "smartwallet-4f238",
-        storageBucket: "smartwallet-4f238.appspot.com",
-        messagingSenderId: "906540826080",
-        appId: "1:906540826080:web:55fcafdaa8c32900afff85"
-        };
-          
-        // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const loginUser = document.getElementById('loginUser');
-    //Get current signed in user
-    onAuthStateChanged(auth, (user) => {
-    if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        const email = user.email;
-        console.log(uid);
-        loginUser.innerHTML = `${email}`
-        } 
-    });
-       
-    let logoutBtn = document.getElementById("logout");
-    logoutBtn.addEventListener('click', logout);
+//Sign out etc...
+const loginUser = document.getElementById('loginUser');
+//Get current signed in user
+firebase.auth().onAuthStateChanged((user) => {
+if (user) {
+// User is signed in, see docs for a list of available properties
+// https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    const email = user.email;
+    console.log(uid);
+    loginUser.innerHTML = `${email}`
+    } 
+});
+   
+let logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener('click', logout);
 
-    //signOut fucntion
-    function logout() {
-      signOut(auth).then(() => {
-        location.href = "login.html";
-     }).catch((error) => {
-    // An error happened.
-       alert(error); 
-      });
-    }
+//signOut fucntion
+function logout() {
+  firebase.auth().signOut().then(() => {
+    location.href = "login.html";
+ }).catch((error) => {
+// An error happened.
+   alert(error); 
+  });
+}
 
 function renderWallet() {
-    onAuthStateChanged(auth, (user) => {
+    firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           var uid = user.uid;
           db.collection("wallets").get().then((snapshots) => {
@@ -126,6 +109,9 @@ function renderResult() {
       }           
    )
    function renderChart() {
+    var expense = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec];
+    var maxExpense = Math.max(...expense);
+    console.log(maxExpense);
     var ctx = document.getElementById("myBarChart");
     var myLineChart = new Chart(ctx, {
       type: 'bar',
@@ -135,7 +121,7 @@ function renderResult() {
           label: "Expense",
           backgroundColor: "#219173",
           borderColor: "#219173",
-          data: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec],
+          data: expense,
         }],
       },
       options: {
@@ -154,7 +140,7 @@ function renderResult() {
           yAxes: [{
             ticks: {
               min: 0,
-              max: 150000,
+              max: maxExpense + 15000,
               maxTicksLimit: 5
             },
             gridLines: {
