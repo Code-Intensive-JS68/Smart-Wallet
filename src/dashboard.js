@@ -17,7 +17,6 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
         // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    
     const loginUser = document.getElementById('loginUser');
     const welcomeUser = document.getElementById('welcome-user');
     const walletList = document.getElementById('list-wallet');
@@ -67,45 +66,21 @@ function getWallet() {
             var Oct = 0;
             var Nov = 0;
             var Dec = 0;
-            
+            var wallets = [];
             snapshots.docs.forEach(doc => {
                 console.log(doc.data());
                 var walletID = doc.data().walletID;
                 var walletName = doc.data().name;                 
                 var walletBalance = doc.data().amount;
-                console.log(walletID);
-                function renderWallet() {
-                  walletList.insertAdjacentHTML('afterbegin', 
-                  `<div class="col-xl-3 col-md-6">
-                  <div class="card-wallet text-white mb-4">
-                    <div class="card-body">
-                      <div>${walletName}</div>
-                      <div>${walletBalance} VND</div>
-                    </div>
-                    <div
-                      class="
-                        card-footer
-                        d-flex
-                        align-items-center
-                        justify-content-between
-                      "
-                    >
-                      <a class="small text-white " href="transaction.html"
-                        >Xem chi tiết</a
-                      >
-                      <div class="small text-white">
-                        <i class="fas fa-angle-right"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>`
-                  )
-                }
-                renderWallet();
+                wallets.push({
+                    name: walletName,
+                    balance: walletBalance 
+                });
+                console.log(wallets);
                 function renderBarchart()  {
                     db.collection("transaction").where("walletID", "==", walletID).get().then((snapshots) => {
                         snapshots.docs.forEach(doc => {
-                            console.log(doc.data());
+                          console.log(doc.data());
                           let amount = doc.data().amount;
                           let type = doc.data().type;
                           let date = doc.data().date.toDate();
@@ -181,7 +156,7 @@ function getWallet() {
                               yAxes: [{
                                 ticks: {
                                   min: 0,
-                                  max: maxExpense + 15000,
+                                  max: maxExpense + 150000,
                                   maxTicksLimit: 5
                                 },
                                 gridLines: {
@@ -201,6 +176,44 @@ function getWallet() {
                 renderBarchart();
                 
             })
+            function renderWallet() {
+                var newArr
+                if(wallets.length > 4) {
+                    newArr = wallets.slice(0, 4);
+                } else {
+                    newArr = wallets;
+                }
+                newArr.forEach(wallet => {
+                walletList.insertAdjacentHTML('afterbegin', 
+                `<div class="col-xl-3 col-md-6">
+                <div class="card-wallet text-white mb-4">
+                  <div class="card-body">
+                    <div>${wallet.name}</div>
+                    <div>${wallet.balance} VND</div>
+                  </div>
+                  <div
+                    class="
+                      card-footer
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    "
+                  >
+                    <a class="small text-white " href="transaction.html"
+                      >Xem chi tiết</a
+                    >
+                    <div class="small text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>`
+                )
+
+                })
+                
+              }
+              renderWallet();
          })
         } 
       });
