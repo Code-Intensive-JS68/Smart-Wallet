@@ -16,7 +16,6 @@ firebase.auth().onAuthStateChanged(() => {
 })
 
 
-
 const filterBySearchBox = {
   searchText: "",
 };
