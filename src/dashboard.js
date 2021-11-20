@@ -18,6 +18,8 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const loginUser = document.getElementById('loginUser');
+    const welcomeUser = document.getElementById('welcome-user');
+    const walletList = document.getElementById('list-wallet');
     
     //Get current signed in user
     onAuthStateChanged(auth, (user) => {
@@ -27,7 +29,8 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
                 var uid = user.uid;
                 var email = user.email;
                 console.log(uid);
-                loginUser.innerHTML = `${email}`            
+                loginUser.innerHTML = `${email}`   
+                welcomeUser.innerHTML = `Welcome back, ${email}`      
                 } 
             });
     
@@ -63,10 +66,41 @@ function getWallet() {
             var Oct = 0;
             var Nov = 0;
             var Dec = 0;
+            
             snapshots.docs.forEach(doc => {
                 console.log(doc.data());
                 var walletID = doc.data().walletID;
+                var walletName = doc.data().name;                 
+                var walletBalance = doc.data().amount;
                 console.log(walletID);
+                function renderWallet() {
+                  walletList.insertAdjacentHTML('afterbegin', 
+                  `<div class="col-xl-3 col-md-6">
+                  <div class="card-wallet text-white mb-4">
+                    <div class="card-body">
+                      <div>${walletName}</div>
+                      <div>${walletBalance} VND</div>
+                    </div>
+                    <div
+                      class="
+                        card-footer
+                        d-flex
+                        align-items-center
+                        justify-content-between
+                      "
+                    >
+                      <a class="small text-white " href="wallets.html"
+                        >Xem chi tiết</a
+                      >
+                      <div class="small text-white">
+                        <i class="fas fa-angle-right"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>`
+                  )
+                }
+                renderWallet();
                 function renderBarchart()  {
                     db.collection("transaction").where("walletID", "==", walletID).get().then((snapshots) => {
                         snapshots.docs.forEach(doc => {
@@ -169,10 +203,12 @@ function getWallet() {
 }
 getWallet();
 
-
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
+
+
+
 
 
 
