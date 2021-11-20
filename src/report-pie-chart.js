@@ -15,11 +15,14 @@ db.collection("transaction").where("walletID","==", walletSelect)
         const singleTrans = element.data();
         //console.log(singleWallet);
         transactionsPie.push(singleTrans);
-       
       });
-      for (let i =0; i < transactionsPie.length; ++i) {
-        transactionAmount.push(Number(transactionsPie[i].amount));
-        transactionCategory.push(transactionsPie[i].category);
+      let transactionsPieFilter = transactionsPie.filter(function (type){
+            return(type.type == "expense")
+      })
+      console.log(transactionsPieFilter)
+      for (let i =0; i < transactionsPieFilter.length; ++i) {
+        transactionAmount.push(Number(transactionsPieFilter[i].amount));
+        transactionCategory.push(transactionsPieFilter[i].category);
       }
       transactionCategory = [...new Set(transactionCategory)]
       console.log(transactionCategory)
@@ -30,7 +33,7 @@ db.collection("transaction").where("walletID","==", walletSelect)
           // {
             // category: category,
             // amount:
-             transactionsPie.filter((o)=> o.category == category).reduce((a,o)=>a+parseInt(o.amount),0)
+            transactionsPieFilter.filter((o)=> o.category == category).reduce((a,o)=>a+parseInt(o.amount),0)
           // }
         )
       }
