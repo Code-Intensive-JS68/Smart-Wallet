@@ -89,7 +89,7 @@ function getWallet() {
                         justify-content-between
                       "
                     >
-                      <a class="small text-white " href="wallets.html"
+                      <a class="small text-white " href="transaction.html"
                         >Xem chi tiết</a
                       >
                       <div class="small text-white">
@@ -149,6 +149,9 @@ function getWallet() {
                           }           
                        )
                        function renderChart() {
+                        var expense = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec];
+                        var maxExpense = Math.max(...expense);
+                        console.log(maxExpense);
                         var ctx = document.getElementById("BarChart");
                         var myLineChart = new Chart(ctx, {
                           type: 'bar',
@@ -158,7 +161,7 @@ function getWallet() {
                               label: "Expense",
                               backgroundColor: "#219173",
                               borderColor: "#219173",
-                              data: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec],
+                              data: expense,
                             }],
                           },
                           options: {
@@ -177,8 +180,8 @@ function getWallet() {
                               yAxes: [{
                                 ticks: {
                                   min: 0,
-                                  max: 100000,
-                                  maxTicksLimit: 10
+                                  max: maxExpense + 15000,
+                                  maxTicksLimit: 5
                                 },
                                 gridLines: {
                                   display: true

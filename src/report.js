@@ -126,6 +126,9 @@ function renderResult() {
       }           
    )
    function renderChart() {
+    var expense = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec];
+    var maxExpense = Math.max(...expense);
+    console.log(maxExpense);
     var ctx = document.getElementById("myBarChart");
     var myLineChart = new Chart(ctx, {
       type: 'bar',
@@ -135,7 +138,7 @@ function renderResult() {
           label: "Expense",
           backgroundColor: "#219173",
           borderColor: "#219173",
-          data: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec],
+          data: expense,
         }],
       },
       options: {
@@ -154,7 +157,7 @@ function renderResult() {
           yAxes: [{
             ticks: {
               min: 0,
-              max: 150000,
+              max: maxExpense + 15000,
               maxTicksLimit: 5
             },
             gridLines: {
