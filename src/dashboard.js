@@ -186,7 +186,7 @@ function getWallet() {
                 newArr.forEach(wallet => {
                 walletList.insertAdjacentHTML('afterbegin', 
                 `<div class="col-xl-3 col-md-6">
-                <div class="card-wallet text-white mb-4">
+                <div class="card-wallet card shadow-sm bg-white rounded mb-4">
                   <div class="card-body">
                     <div>${wallet.name}</div>
                     <div>${wallet.balance} VND</div>
