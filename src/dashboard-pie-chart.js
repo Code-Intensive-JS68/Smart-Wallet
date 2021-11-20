@@ -22,10 +22,12 @@ firebase.auth().onAuthStateChanged(() => {
                 //console.log(singleWallet);
                 transactionsPie.push(singleTrans);
               });
-
-              for (let i = 0; i < transactionsPie.length; ++i) {
-                transactionAmount.push(Number(transactionsPie[i].amount));
-                transactionCategory.push(transactionsPie[i].category);
+              let transactionsPieFilter = transactionsPie.filter(function (type){
+                return(type.type == "expense")
+          })
+              for (let i = 0; i < transactionsPieFilter.length; ++i) {
+                transactionAmount.push(Number(transactionsPieFilter[i].amount));
+                transactionCategory.push(transactionsPieFilter[i].category);
               }
               transactionCategory = [...new Set(transactionCategory)];
               console.log(transactionCategory);
@@ -40,7 +42,7 @@ firebase.auth().onAuthStateChanged(() => {
                   // {
                   // category: category,
                   // amount:
-                  transactionsPie
+                  transactionsPieFilter
                     .filter((o) => o.category == category)
                     .reduce((a, o) => a + parseInt(o.amount), 0)
                   // }
