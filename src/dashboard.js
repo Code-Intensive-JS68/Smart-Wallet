@@ -17,6 +17,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
         // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    
     const loginUser = document.getElementById('loginUser');
     const welcomeUser = document.getElementById('welcome-user');
     const walletList = document.getElementById('list-wallet');
