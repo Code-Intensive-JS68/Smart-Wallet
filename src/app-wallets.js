@@ -82,6 +82,37 @@ const createList = function (wallets, filterBySearchBox) {
 
               </div>
               <div class="modal-body">
+                <div class="row wallet-details">
+                <div class="col-2">
+                <h2><i class="fas fa-circle" style="color:` +
+                element.color +
+                `"></i></h2>
+                </div>
+
+                <div class=" col">
+                <div class="row">
+                <h6 class="text-secondary">Tên Ví</h6>
+                <h4>` +
+                element.name +
+                `</h4>
+                </div>
+                <div class="row">
+                <h6 class="text-secondary">Loại Ví</h6>
+                <h4>` +
+                element.type +
+                `</h4>
+                </div>
+                </div>
+                <div class="col">
+                <div class="amount-detail">
+                <h6 class="text-secondary">Số dư Ví</h6>
+                <h4>` +
+                element.amount + ` `+element.currency+
+                `</h4>
+               </div>
+               </div>
+                </div>
+
                 <div class="collapse" id="modalUpdate` +
         element.walletID +
         `" >
@@ -127,7 +158,7 @@ const createList = function (wallets, filterBySearchBox) {
 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
               </div>
         </div>
       	`
