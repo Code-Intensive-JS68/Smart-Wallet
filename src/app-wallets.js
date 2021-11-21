@@ -37,7 +37,7 @@ const createList = function (wallets, filterBySearchBox) {
 
     $("#wallet-column").append(
       `
-        <div class="wallet-card row" data-bs-toggle="modal" data-bs-target="#modal` +
+        <div class="wallet-card row shadow-sm" data-bs-toggle="modal" data-bs-target="#modal` +
         element.walletID +
         `">
             <div class="wallet-name col">
@@ -70,12 +70,12 @@ const createList = function (wallets, filterBySearchBox) {
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header row">
-                <h5 class="modal-title col" id="exampleModalLabel">Thông tin chi tiết ví</h5>
+                <h5 class="modal-title col font-weight-bold" id="exampleModalLabel">Thông tin chi tiết ví</h5>
 
-                <button type="button" class="update-wallet btn btn-outline-success  col-1" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
+                <button type="button" class="update-wallet btn btn-outline-success font-weight-bold col-1" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
         element.walletID +
         `" >Sửa</button>
-                <button type="button" class="delete-wallet btn btn-outline-danger col-1 mx-3" onClick="deleteWallet('` +
+                <button type="button" class="delete-wallet btn btn-outline-danger col-1 mx-3 font-weight-bold" onClick="deleteWallet('` +
         element.walletID +
         `')" >Xóa</button>
 
@@ -91,13 +91,13 @@ const createList = function (wallets, filterBySearchBox) {
                 <div class=" col">
                 <div class="row">
                 <h6 class="text-secondary">Tên Ví</h6>
-                <h4>` +
+                <h4 class="font-weight-bold">` +
                 element.name +
                 `</h4>
                 </div>
                 <div class="row">
                 <h6 class="text-secondary">Loại Ví</h6>
-                <h4>` +
+                <h4 class="font-weight-bold">` +
                 element.type +
                 `</h4>
                 </div>
@@ -105,7 +105,7 @@ const createList = function (wallets, filterBySearchBox) {
                 <div class="col">
                 <div class="amount-detail">
                 <h6 class="text-secondary">Số dư Ví</h6>
-                <h4>` +
+                <h4 class="font-weight-bold">` +
                 element.amount + ` `+element.currency+
                 `</h4>
                </div>
@@ -118,7 +118,7 @@ const createList = function (wallets, filterBySearchBox) {
                  <div class="card card-body">
                     <form action="" class="row" id="form-wallet-update">
                       <div class="mb-2 col-8">
-                       <label for="updateWalletName" class="col-sm-2 col-form-label-sm ">Tên
+                       <label for="updateWalletName" class="col-sm-2 col-form-label-sm font-weight-bold">Tên
                         ví</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control-sm larger-box" placeholder="`+element.name+`"
@@ -126,13 +126,13 @@ const createList = function (wallets, filterBySearchBox) {
                     </div>
                   </div>
                   <div class="mb-2 col-4 ">
-                  <label for="updateWalletColor" class="col col-form-label-sm">Màu sắc</label>
+                  <label for="updateWalletColor" class="col col-form-label-sm font-weight-bold">Màu sắc</label>
       <div class="col">
          <input type="color" class="form-select"  value="`+element.color+`" id="updateWalletColor`+element.walletID+`">
       </div>
   </div>
   <div class="mb-2 ">
-      <label for="updateWalletType" class="col col-form-label-sm">Loại</label>
+      <label for="updateWalletType" class="col col-form-label-sm font-weight-bold">Loại</label>
       <div class="col">
           <select class="form-select form-select-sm" aria-label="Default select example"
               id="updateWalletType`+element.walletID+`">
@@ -145,7 +145,7 @@ const createList = function (wallets, filterBySearchBox) {
           </select>
       </div>
       <div class="row mt-3 mx-1">
-      <button type="button" class="btn btn-primary update-wallet" onclick="updateWallet('` +
+      <button type="button" class="btn btn-primary update-wallet font-weight-bold" onclick="updateWallet('` +
       element.walletID +
       `')" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
       element.walletID +
@@ -157,7 +157,7 @@ const createList = function (wallets, filterBySearchBox) {
 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-secondary font-weight-bold" data-bs-dismiss="modal">Đóng</button>
               </div>
         </div>
       	`

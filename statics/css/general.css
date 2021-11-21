@@ -29,15 +29,7 @@ a:hover{
     transform: translateX(1em);
 }
 
-.sb-sidenav-menu .nav .nav-link:hover::after{
-     border-radius: 60px 0 0 60px;
-}
-.sb-sidenav-menu .nav .nav-link:hover::before{
-    border-radius: 60px 0 0 60px;
-}
-#sidenavAccordion > div.sb-sidenav-menu > div > div:nth-child(1){
-    color: rgba(255, 255, 255, 0.5);
-}
+
 
 .sb-nav-link-icon .fas{
     color :#394141
@@ -57,7 +49,6 @@ a:hover{
 }
 .card-header{
     font-weight: bold;
-
 }
 .card-wallet-name{
     color:#858796
@@ -67,3 +58,10 @@ a:hover{
     font-size: 1.3rem;
     color:#394141;
 }
+.lead-custom-chart{
+    margin-left: 0.2rem;
+    color:#6c757d;
+  }
+  .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading{
+    color: rgba(255, 255, 255, 0.5);
+  }
