@@ -57,7 +57,7 @@ const createList = function (wallets, filterBySearchBox) {
         element.amount +
         `</strong>
             </div>
-            <div class="wallet-currency col-1">
+            <div class="wallet-currency col-2">
                 <strong>` +
         element.currency +
         `</strong>

@@ -1,6 +1,6 @@
 #header-content{
     display:flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .container-btn{
     display: flex;
@@ -75,10 +75,4 @@ body{
 }
 .lead-custom{
   color:#6c757d;
-}
-.custom-head{
-  margin-left: -13em;
-}
-.custom-head-btn{
-  margin-right: -3rem;
 }
