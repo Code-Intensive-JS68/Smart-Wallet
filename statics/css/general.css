@@ -1,0 +1,69 @@
+body{
+    font-family: 'Nunito', sans-serif !important;
+    background-color: #eaebee
+        }
+a{
+    text-decoration: none;
+    color: #5a5c69;
+}
+a:hover{
+    color: #7ec7ae;
+}
+.font-weight-bold{
+    font-weight: 700!important
+}
+.font-weight-bold .card-body{
+    color: #5a5c69;
+}
+.sb-sidenav-menu{
+    background-color: #1cc88a;
+}
+.sb-sidenav-menu .nav .nav-link{
+    transition: transform 300ms ease-out;
+    color: white;
+}
+.sb-sidenav-menu .nav .nav-link:hover{
+    background: #ffff;
+     border-radius: 60px 0 0 60px;
+    color: #394141;
+    transform: translateX(1em);
+}
+
+.sb-sidenav-menu .nav .nav-link:hover::after{
+     border-radius: 60px 0 0 60px;
+}
+.sb-sidenav-menu .nav .nav-link:hover::before{
+    border-radius: 60px 0 0 60px;
+}
+#sidenavAccordion > div.sb-sidenav-menu > div > div:nth-child(1){
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.sb-nav-link-icon .fas{
+    color :#394141
+}
+#loginUser{
+    font-size:0.8rem;
+}
+.card-wallet{
+    transition: transform 300ms ease-out;
+}
+.card-wallet:hover{
+    cursor:pointer;
+    transform: scale(1.1);
+}
+.mt-4{
+    font-weight: bold;
+}
+.card-header{
+    font-weight: bold;
+
+}
+.card-wallet-name{
+    color:#858796
+}
+.card-wallet-balance{
+    font-weight: bold;
+    font-size: 1.3rem;
+    color:#394141;
+}
