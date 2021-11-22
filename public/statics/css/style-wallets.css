@@ -1,0 +1,78 @@
+#header-content{
+    display:flex;
+    justify-content: space-between;
+  }
+  .container-btn{
+    display: flex;
+    align-self: center;
+  }
+  #container-content{
+    background-color: #eff0f2;
+  }
+  .wallet-card{
+    transition: transform 300ms ease-out;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    padding:0.5rem;
+    margin: 1rem 0rem;
+    justify-content: space-between;
+  }
+  .wallet-card:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+  }
+  .search-bar{
+    padding:0.5rem;
+    margin: 1rem 0rem;
+  }
+  #read-column{
+    min-height: 50vh;
+    border-left: 2px solid #fff;
+  }
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  a:hover {
+    color: #222222
+  }
+  
+  .wallet-details .col-2 {
+    display: flex;
+    align-content: space-around;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .wallet-details .col .row{
+    padding-bottom: 1em;;
+  }
+  
+  .filter-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dropdown{
+    margin-left: 1rem;
+  }
+#form-wallet{
+    display: flex;
+}
+.modal-body  .larger-box {
+    width: 120%;
+    border: 1px solid #ced4da;
+}
+.modal-content .modal-header{
+  border-bottom: none;
+}
+body{
+  font-family: 'Nunito', sans-serif;
+}
+.lead-custom{
+  color:#6c757d;
+}

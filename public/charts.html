@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Charts - SB Admin</title>
+        <style>
+            #select {
+                display: flex;
+                justify-content: space-evenly;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            #select-wallet {     
+                width: 200px;
+            }
+            #select-year {
+                width: 200px;
+            }
+            #filter {
+                display: flex;
+                justify-content: center;
+                padding-bottom: 40px;
+            }
+            #filter-btn {
+                margin-top: 20px;
+            }
+        </style>
+        <link href="./statics/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="./statics/css/general.css">
+
+        <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    </head>
+    <body class="sb-nav-fixed">
+      <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html"
+          ><strong>Smart Wallet</strong><i class="fab fa-google-wallet mx-1"></i></a
+        >
+        <!-- Sidebar Toggle-->
+        <button
+          class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+          id="sidebarToggle"
+          href="#!"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <!-- Navbar Search-->
+        <form
+          class="
+            d-none d-md-inline-block
+            form-inline
+            ms-auto
+            me-0 me-md-3
+            my-2 my-md-0
+          "
+        >
+          <div class="input-group" style="display:none">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Tìm kiếm..."
+              aria-label="Tìm kiếm..."
+              aria-describedby="btnNavbarSearch"
+            />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdown"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              ><i class="fas fa-user fa-fw"></i
+            ></a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdown"
+            >
+              <li><a class="dropdown-item" href="#!">Settings</a></li>
+              <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a  class="btn btn-secondary" id="logout" style="margin: 20px">Đăng xuất</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+          <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+              <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                  <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Mục chính</div>
+                    <a class="nav-link" href="index.html">
+                      <div class="sb-nav-link-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                      </div>
+                      Dashboard
+                    </a>
+                    <a class="nav-link" href="wallets.html">
+                      <div class="sb-nav-link-icon">
+                        <i class="fas fa-wallet"></i>
+                      </div>
+                      Ví của tôi
+                    </a>
+                    <a class="nav-link" href="transaction.html">
+                      <div class="sb-nav-link-icon">
+                        <i class="fas fa-book"></i>
+                      </div>
+                      Sổ giao dịch
+                    </a>
+                    <a class="nav-link" href="charts.html">
+                      <div class="sb-nav-link-icon">
+                        <i class="fas fa-chart-area"></i>
+                      </div>
+                      Báo cáo
+                    </a>
+      
+                    <div
+                      class="collapse"
+                      id="collapsePages"
+                      aria-labelledby="headingTwo"
+                      data-bs-parent="#sidenavAccordion"
+                    ></div>
+                   
+                  </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                  <div class="small">Logged in as:</div>
+                  <p id="loginUser"></p>
+                </div>
+              </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Báo cáo chi tiêu</h1>
+                        <p class="lead-custom-chart">Đồ thị trực quan và chi tiết</p>
+                        <!-- <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Charts</li>
+                        </ol> -->
+                        <!-- <div class="card mb-4">
+                            <div class="card-body">
+                                Chart.js is a third party plugin that is used to generate the charts in this template. The charts below have been customized - for further customization options, please visit the official
+                                <a target="_blank" href="https://www.chartjs.org/docs/latest/">Chart.js documentation</a>
+                                .
+                            </div>
+                        </div> -->
+                        <div id="select">
+                        <div id="select-wallet">
+                          <h5>Chọn ví</h5>
+                          <select id="list-wallet" class="form-select shadow-sm" aria-label="Default select example">
+                          </select>
+                        </div>
+
+                        <div id="select-year">
+                            <h5>Chọn thời gian</h5>
+                            <select id="list-year" class="form-select shadow-sm" aria-label="Default select example">
+                                <option value= 2021>2021</option>
+                                <option value= 2020>2020</option>
+                                <option value= 2019>2019</option>
+                                <option value= 2018>2018</option>
+                            </select>
+                        </div>
+                        </div>
+                        <div id="filter">
+                            <button type="button" class="btn btn-primary shadow-sm font-weight-bold" id="filter-btn">Hiển thị báo cáo</button>
+                        </div>
+
+                        
+                        
+                        
+                        <!-- <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-area me-1"></i>
+                                Area Chart Example
+                            </div>
+                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
+                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4 shadow-sm">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Tổng kết chi tiêu theo tháng
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Smart Wallet TM</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card mb-4 shadow-sm">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-pie me-1"></i>
+                                        Cấu trúc chi tiêu theo ví
+                                    </div>
+                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Smart Wallet TM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="./statics/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <!-- <script src="./statics/assets/demo/chart-area-demo.js"></script> -->
+        <script >
+          const firebaseConfig = {
+              apiKey: "AIzaSyAhQb16UMv471Z4PPB5UedpdecQ3qYEChM",
+              authDomain: "smartwallet-4f238.firebaseapp.com",
+              projectId: "smartwallet-4f238",
+              storageBucket: "smartwallet-4f238.appspot.com",
+              messagingSenderId: "906540826080",
+              appId: "1:906540826080:web:55fcafdaa8c32900afff85"
+          };
+
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          const db = firebase.firestore()
+      </script>
+      <!-- ---------------------------------------------------------------- -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- <script type="module" src="./statics/assets/demo/chart-bar-demo.js"></script> -->
+        <script type="module" src="./src/report-pie-chart.js"></script>
+        <script src="./src/report.js"></script>
+    </body>
+</html>

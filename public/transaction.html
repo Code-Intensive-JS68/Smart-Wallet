@@ -1,0 +1,279 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Wallet</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="./statics/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./statics/css/transaction.css">
+    <script src="./statics/js/bootstrap.bundle.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html"><strong>Smart Wallet</strong></a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- Navbar Search-->
+        <form class="
+            d-none d-md-inline-block
+            form-inline
+            ms-auto
+            me-0 me-md-3
+            my-2 my-md-0
+          ">
+
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="#!">Đăng xuất</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="row">
+      <div id="layoutSidenav" class="col-2">
+          <div id="layoutSidenav_nav">
+              <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                  <div class="sb-sidenav-menu">
+                      <div class="nav">
+                          <div class="sb-sidenav-menu-heading">Mục chính</div>
+                          <a class="nav-link" href="index.html">
+                              <div class="sb-nav-link-icon">
+                                  <i class="fas fa-tachometer-alt"></i>
+                              </div>
+                              Dashboard
+                          </a>
+                          <a class="nav-link" href="wallets.html" >
+                              <div class="sb-nav-link-icon">
+                                  <i class="fas fa-chart-area"></i>
+                              </div>
+                              Ví của tôi
+                          </a>
+                          <a class="nav-link" href="transaction.html" style="color: white; pointer-events: none">
+                              <div class="sb-nav-link-icon">
+                                  <i class="fas fa-chart-area"></i>
+                              </div>
+                              Sổ giao dịch
+                          </a>
+                          <a class="nav-link" href="charts.html">
+                              <div class="sb-nav-link-icon">
+                                  <i class="fas fa-chart-area"></i>
+                              </div>
+                              Báo cáo
+                          </a>
+  
+                          <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                              data-bs-parent="#sidenavAccordion">
+                          </div>
+  
+                          <div class="sb-sidenav-menu-heading">Công cụ</div>
+                          <a class="nav-link" href="tables.html">
+                              <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                              Đổi tiền tệ
+                          </a>
+                      </div>
+                  </div>
+                  <div class="sb-sidenav-footer">
+                      <div class="small">Logged in as:</div>
+                      Start Bootstrap
+                  </div>
+              </nav>
+          </div>
+      </div>
+      <div id="layoutSidenav_content" class="col-10">
+          <div class="transaction">
+              <div class="top-transaction">
+                <h2 class="header-transaction">Sổ giao dịch</h2>
+                <div class="select-time">
+                </div>
+              </div>
+                  <div class="transaction-history">
+                    <!-- user-trans -->
+
+                  </div>
+            </div>
+            <form action="" id="form-trans" method="">
+             <div class="modal">
+              <div class="modal-container">
+                  <header class="modal-header">
+                      <div class="modal-close js-modal-close">
+                        <i class="fas fa-times"></i>
+                      </div>
+                      Thêm giao dịch
+                  </header>
+                  <div class="modal-body">
+                      <label for="" class="modal-label">
+                         Chọn loại giao dịch
+                      </label>
+                      <select id = "select-cate" class="form-select" aria-label="Default select example">
+                        <option value = "undefine" disabled selected>Open this select menu</option>
+                        <option  disabled>--------------------------------------------------Khoản Thu---------------------------------------------------</option>
+                        <option value="food">Ăn uống</option>
+                        <option value="cafe">Cafe</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="receipt">Hóa đơn</option>
+                        <option value="fuel">Xăng xe</option>
+                        <option value="travel">Di chuyển</option>
+                        <option value="healing">Chữa bệnh</option>
+                        <option value="pet">Thú cưng</option>
+                        <option value="love">Người yêu</option>
+                        <option value="family">Gia đình</option>
+                        <option value="study">Học tập</option>
+                        <option value="game">Giải trí</option>
+                        <option value="sport">Thể thao</option>
+                        <option value="loan">Cho vay</option>
+                        <option value="other-expense">Khác</option>
+                        <option  disabled>-------------------------------------------------Khoản Chi--------------------------------------------------</option>
+                        <option value="wage">Tiền lương</option>
+                        <option value="bank">Tiết Kiệm</option>
+                        <option value="prize">Giải thưởng</option>
+                        <option value="gift">Quà tặng</option>
+                        <option value="get-loan">Vay</option>
+                        <option value="other-revenue">Khác</option>
+                      </select>
+                      <label for="" class="modal-label">
+                          Nhập số tiền
+                      </label> 
+                      <input type="number" class="modal-input input-amount" min="0" placeholder="Nhập số tiền?">
+                      <label for="start">Ngày thu chi:</label>
+                      <input class="modal-input" id ="select-time" type="date" id="start" name="trip-start"
+                             value= "2021-01-01"
+                             min="2018-01-01" max="3000-01-01">
+                      <label for="" class="modal-label">
+                          Ghi chú
+                      </label> 
+                      <input type="text" class="modal-input" id="note-modal" placeholder="Viết ghi chú">
+                      <button class="save-trans" type="submit" >
+                          Lưu giao dịch 
+                      </button>
+                  </div>
+              </div>
+            </div>
+          </form>
+
+          <form action="" id="form-update" method="">
+            <div class="modal-info">
+             <div class="modal-info-container">
+                 <header class="modal-info-header">
+                     <div class="modal-info-close js-modal-info-close">
+                       <i class="fas fa-times"></i>
+                     </div>
+                     Thông tin giao dịch
+                 </header>
+                 <div class="modal-info-body">
+                     <label for="" class="modal-info-label">Loại giao dịch:</label>
+                     <div class="container-info">
+                         <span class="info-trans info-cate"></span>
+                     </div>
+                     <label for="" class="modal-info-label">Số tiền:</label> 
+                     <div class="container-info">
+                         <span class="info-trans info-amount"></span>   
+                    </div>
+                     <label for="start">Ngày thu chi:</label>
+                     <div class="container-info">
+                         <span class="info-trans info-date"></span>
+                    </div>
+                     <label for="" class="modal-info-label">Ghi chú:</label> 
+                     <div class="container-info">
+                         <span class="info-trans info-note"></span>
+                    </div>
+                 </div>
+             </div>
+           </div>
+         </form>
+         <form action="" id="form-update" method="">
+            <div class="modal-update">
+             <div class="modal-update-container">
+                 <header class="modal-update-header">
+                     <div class="modal-update-close js-modal-update-close">
+                       <i class="fas fa-times"></i>
+                     </div>
+                     Sửa giao dịch
+                 </header>
+                 <div class="modal-update-body">
+                     <label for="" class="modal-update-label">Loại giao dịch:</label>
+                     <div class="container-update">
+                         <select class="form-select" id="select-update-cate" aria-label="Default select example">
+                            <option value="undefine" disabled selected>Open this select menu</option>
+                            <option  disabled>--------------------------------------------------Khoản Thu---------------------------------------------------</option>
+                            <option value="food">Ăn uống</option>
+                            <option value="cafe">Cafe</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="receipt">Hóa đơn</option>
+                            <option value="fuel">Xăng xe</option>
+                            <option value="travel">Di chuyển</option>
+                            <option value="healing">Chữa bệnh</option>
+                            <option value="pet">Thú cưng</option>
+                            <option value="love">Người yêu</option>
+                            <option value="family">Gia đình</option>
+                            <option value="study">Học tập</option>
+                            <option value="game">Giải trí</option>
+                            <option value="sport">Thể thao</option>
+                            <option value="loan">Cho vay</option>
+                            <option value="other-expense">Khác</option>
+                            <option  disabled>-------------------------------------------------Khoản Chi--------------------------------------------------</option>
+                            <option value="wage">Tiền lương</option>
+                            <option value="bank">Tiết Kiệm</option>
+                            <option value="prize">Giải thưởng</option>
+                            <option value="gift">Quà tặng</option>
+                            <option value="get-loan">Vay</option>
+                            <option value="other-revenue">Khác</option>
+                          </select>
+                     </div>
+                     <label for="" class="modal-update-label">Số tiền:</label> 
+                     <div class="container-update">
+                          <input type="number" class="modal-input update-input-amount"  min="0" placeholder="Nhập số tiền?" >
+                    </div>
+                        <button class="save-update" type="submit">
+                            Lưu giao dịch 
+                        </button>
+                 </div>
+             </div>
+           </div>
+         </form>
+      </div>
+    </div>
+    <div class="btn add-transaction">
+      Thêm giao dịch
+    </div>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAhQb16UMv471Z4PPB5UedpdecQ3qYEChM",
+        authDomain: "smartwallet-4f238.firebaseapp.com",
+        projectId: "smartwallet-4f238",
+        storageBucket: "smartwallet-4f238.appspot.com",
+        messagingSenderId: "906540826080",
+        appId: "1:906540826080:web:55fcafdaa8c32900afff85"
+      };
+      
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      console.log(db)
+    </script>
+    <script type="module" src="./statics/js/transaction/firebase.js"></script>
+    <script type ="module" src="./statics/js/transaction/uitransaction.js"></script>
+    <script type="module" src="./statics/js/transaction/transaction.js"></script>
+</body>
+
+</html>

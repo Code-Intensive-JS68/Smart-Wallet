@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Wallet</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+
+    <link href="./statics/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./statics/css/general.css">
+    <link rel="stylesheet" href="./statics/css/style-wallets.css">
+    
+    <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+        crossorigin="anonymous"></script>
+    <script src="./statics/js/bootstrap.bundle.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html"><strong>Smart Wallet</strong><i class="fab fa-google-wallet mx-1"></i></a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- Navbar Search-->
+        <form class="
+            d-none d-md-inline-block
+            form-inline
+            ms-auto
+            me-0 me-md-3
+            my-2 my-md-0
+          ">
+
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="btn btn-secondary" id="logout" style="margin: 20px">Đăng xuất</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Mục chính</div>
+                        <a class="nav-link" href="index.html">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="wallets.html" >
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            Ví của tôi
+                        </a>
+                        <a class="nav-link" href="transaction.html">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            Sổ giao dịch
+                        </a>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-chart-area"></i>
+                            </div>
+                            Báo cáo
+                        </a>
+
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                            data-bs-parent="#sidenavAccordion">
+                        </div>
+
+                       
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    <p id = "loginUser"></p>
+                </div>
+            </nav>
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4" id="header-content">
+                    <div class="container-head custom-head">
+                        <h1 class="mt-4">Ví của tôi</h1>
+                        <p class="lead-custom">Hãy tạo ví trước và bắt đầu sử dụng</p>
+                    </div>
+                    <div class="container-btn custom-head-btn">
+                        <button type="button" class="btn btn-primary btn-lg shadow-sm font-weight-bold" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Thêm ví mới
+                        </button>
+                    </div>
+                </div>
+                <div class="container-fluid px-4" id="container-content">
+                    <div class="row justify-content-center " id="main-content-wallet">
+                        <div class="col-8 " id="wallet-column">
+                            <div class="wallet-card row">
+                                <div class="wallet-name col">
+                                    <!-- <i class="fas fa-piggy-bank" style="color:tomato"></i> -->
+                                    <!-- <strong>Ví tiết kiệm du lịch</strong> -->
+                                </div>
+                                <div class="wallet-type col text-secondary">
+                                    <!-- Tài khoản tiết kiệm -->
+                                </div>
+                                <div class="wallet-amount col" id="wallet-amount">
+                                    <!-- <strong>50.000.000 VND</strong> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 " id="read-column">
+                            <div class="wallet-read">
+                                <div class="search-bar">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" placeholder="Tìm kiếm..."
+                                            aria-label="Tìm kiếm..." aria-describedby="btnNavbarSearch" id="wallet-search">
+                                        <button class="btn btn-secondary" id="btnNavbarSearch" type="button" disabled>
+                                            <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true"
+                                                focusable="false" data-prefix="fas" data-icon="search" role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
+                                                </path>
+                                            </svg><!-- <i class="fas fa-search"></i> Font Awesome fontawesome.com -->
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="filter-container">
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Thêm ví</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="row" id="form-wallet">
+                            <div class="mb-2 col-8">
+                                <label for="inputWalletName" class="col-sm-2 col-form-label-sm font-weight-bold">Tên
+                                    ví</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control-sm input-wallet-name larger-box" placeholder="Tên ví của bạn"
+                                        id="inputWalletName">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-4 ">
+                                <label for="inputWalletColor" class="col col-form-label-sm font-weight-bold">Màu sắc</label>
+                                <div class="col">
+                                   <input type="color" class="form-select input-wallet-color" value="#1C4E80" id="inputWalletColor" >
+                                </div>
+                            </div>
+                            <div class="mb-2 ">
+                                <label for="inputWalletType" class="col col-form-label-sm font-weight-bold">Loại</label>
+                                <div class="col">
+                                    <select class="form-select form-select-sm input-wallet-type" aria-label="Default select example"
+                                        id="inputWalletType">
+                                        <option value="Tiền mặt">Tiền mặt</option>
+                                        <option value="Tiết kiệm">Tiết kiệm</option>
+                                        <option value="Đầu tư">Đầu tư</option>
+                                        <option value="Chi tiêu cần thiết">Chi tiêu cần thiết</option>
+                                        <option value="Từ thiện">Từ thiện</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-8">
+                                <label for="inputWalletAmount" class="col-form-label-sm font-weight-bold">Số tiền hiện
+                                    có</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control-sm input-wallet-amount larger-box" placeholder="0" id="inputWalletAmount">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-4 ">
+                                <label for="inputWalletCurrency" class="col col-form-label-sm font-weight-bold">Tiền tệ</label>
+                                <div class="col">
+                                    <select class="form-select form-select-sm input-wallet-currency" aria-label="Default select example"
+                                        id="inputWalletCurrency" disabled>
+                                        <option value="VND">VND</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary submit-new-wallet"  data-bs-dismiss="modal">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- -------------------------------Static script for running Sidebar --------------------------------- -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script> -->
+
+        <script src="./statics/js/scripts.js"></script>
+        <!-- ---------------------------------------------------------------- -->
+
+
+        <!-- ------------------------------Firebase SDK---------------------------------- -->
+        <script >
+            const firebaseConfig = {
+                apiKey: "AIzaSyAhQb16UMv471Z4PPB5UedpdecQ3qYEChM",
+                authDomain: "smartwallet-4f238.firebaseapp.com",
+                projectId: "smartwallet-4f238",
+                storageBucket: "smartwallet-4f238.appspot.com",
+                messagingSenderId: "906540826080",
+                appId: "1:906540826080:web:55fcafdaa8c32900afff85"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore()
+        </script>
+        <!-- ---------------------------------------------------------------- -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="./src/app-wallets.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
+        
+</body>
+
+</html>
