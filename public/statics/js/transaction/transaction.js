@@ -45,13 +45,19 @@ template.innerHTML = `
 
 .amount {
     position: relative;
-    min-width:10%
+    min-width:5%;
+    max-height: 30px;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /*Tạo dấu 3 chấm và làm tên k dài*/
 }
 
 .amount::before {
     content: "vnđ";
     position: absolute;
-    right: -20px;
+    right: -60px;
+    margin-right:20px
 }
 
 
@@ -544,6 +550,7 @@ function validateTrans(
         ).then((d) => {});
         updateWalletBalance(walletID, inputAmount, typeTrans).then((d) => {});
         formTrans.reset();
+        document.location.reload
       } else {
         alert("Hãy nhập số tiền");
       }
@@ -634,16 +641,15 @@ async function renderSelectForWallets() {
         if (change.type === "modified") {
           return;
         }
-        console.log(change.doc.data().userID);
         let option = document.createElement("option");
         option.text = change.doc.data().name;
         option.setAttribute("walletID", change.doc.data().walletID);
         selectForWallet.add(option);
-        console.log(userID);
       }
     });
   });
 }
+
 renderSelectForWallets();
 
 // Tạo danh sách chọn ví
@@ -679,7 +685,7 @@ selectWallet.addEventListener("change", () => {
 async function filterWallet(id) {
   await db.collection("transaction").onSnapshot((sn) => {
     let changes = sn.docChanges();
-    TransUI.innerHTML = "";
+    TransUI.innerHTML ="";
     changes.forEach((change) => {
       if (change.doc.data().userID == userID) {
         let dataTrans = change.doc;
