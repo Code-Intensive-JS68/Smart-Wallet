@@ -766,7 +766,9 @@ if (user) {
     loginUser.innerHTML = `${email}`
   localStorage.setItem("userID", uid)
 
-    } 
+    } else {
+      location.href = "login.html";
+    }
 });
    
 let logoutBtn = document.getElementById("logout");
