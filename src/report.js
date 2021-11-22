@@ -140,7 +140,7 @@ function renderResult() {
           yAxes: [{
             ticks: {
               min: 0,
-              max: maxExpense + 15000,
+              max: maxExpense + 150000,
               maxTicksLimit: 5
             },
             gridLines: {
