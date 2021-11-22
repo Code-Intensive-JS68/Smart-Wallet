@@ -1,10 +1,9 @@
-
-
 let wallets = [];
 
 firebase.auth().onAuthStateChanged(() => {
   this.currentUser = firebase.auth().currentUser.uid;
-  db.collection("wallets").where("userID","==", currentUser)
+  db.collection("wallets")
+    .where("userID", "==", currentUser)
     .get()
     .then((data) => {
       data.docs.forEach((element) => {
@@ -13,9 +12,7 @@ firebase.auth().onAuthStateChanged(() => {
       });
       createList(wallets, filterBySearchBox);
     });
-})
-
-
+});
 
 const filterBySearchBox = {
   searchText: "",
@@ -24,7 +21,6 @@ $("#wallet-search").on("input", () => {
   filterBySearchBox.searchText = $("#wallet-search").val();
   createList(wallets, filterBySearchBox);
 });
-
 
 const createList = function (wallets, filterBySearchBox) {
   const filteredWallets = $.grep(wallets, (element) => {
@@ -35,7 +31,6 @@ const createList = function (wallets, filterBySearchBox) {
   $("#wallet-column").empty();
 
   filteredWallets.forEach((element) => {
-
     $("#wallet-column").append(
       `
         <div class="wallet-card row shadow-sm" data-bs-toggle="modal" data-bs-target="#modal` +
@@ -85,30 +80,32 @@ const createList = function (wallets, filterBySearchBox) {
                 <div class="row wallet-details">
                 <div class="col-2">
                 <h2><i class="fas fa-circle" style="color:` +
-                element.color +
-                `"></i></h2>
+        element.color +
+        `"></i></h2>
                 </div>
 
                 <div class=" col">
                 <div class="row">
                 <h6 class="text-secondary">Tên Ví</h6>
                 <h4 class="font-weight-bold">` +
-                element.name +
-                `</h4>
+        element.name +
+        `</h4>
                 </div>
                 <div class="row">
                 <h6 class="text-secondary">Loại Ví</h6>
                 <h4 class="font-weight-bold">` +
-                element.type +
-                `</h4>
+        element.type +
+        `</h4>
                 </div>
                 </div>
                 <div class="col">
                 <div class="amount-detail">
                 <h6 class="text-secondary">Số dư Ví</h6>
                 <h4 class="font-weight-bold">` +
-                element.amount + ` `+element.currency+
-                `</h4>
+        element.amount +
+        ` ` +
+        element.currency +
+        `</h4>
                </div>
                </div>
                 </div>
@@ -122,22 +119,38 @@ const createList = function (wallets, filterBySearchBox) {
                        <label for="updateWalletName" class="col-sm-2 col-form-label-sm font-weight-bold">Tên
                         ví</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control-sm larger-box" placeholder="`+element.name+`"
-                      id="updateWalletName`+element.walletID+`" value="`+element.name+`">
+                      <input type="text" class="form-control-sm larger-box" placeholder="` +
+        element.name +
+        `"
+                      id="updateWalletName` +
+        element.walletID +
+        `" value="` +
+        element.name +
+        `">
                     </div>
                   </div>
                   <div class="mb-2 col-4 ">
                   <label for="updateWalletColor" class="col col-form-label-sm font-weight-bold">Màu sắc</label>
       <div class="col">
-         <input type="color" class="form-select"  value="`+element.color+`" id="updateWalletColor`+element.walletID+`">
+         <input type="color" class="form-select"  value="` +
+        element.color +
+        `" id="updateWalletColor` +
+        element.walletID +
+        `">
       </div>
   </div>
   <div class="mb-2 ">
       <label for="updateWalletType" class="col col-form-label-sm font-weight-bold">Loại</label>
       <div class="col">
           <select class="form-select form-select-sm" aria-label="Default select example"
-              id="updateWalletType`+element.walletID+`">
-              <option value="`+element.type+`" selected">`+element.type+`</option>
+              id="updateWalletType` +
+        element.walletID +
+        `">
+              <option value="` +
+        element.type +
+        `" selected">` +
+        element.type +
+        `</option>
               <option value="Tiền mặt">Tiền mặt</option>
               <option value="Tiết kiệm">Tiết kiệm</option>
               <option value="Đầu tư">Đầu tư</option>
@@ -147,10 +160,10 @@ const createList = function (wallets, filterBySearchBox) {
       </div>
       <div class="row mt-3 mx-1">
       <button type="button" class="btn btn-primary update-wallet font-weight-bold" onclick="updateWallet('` +
-      element.walletID +
-      `')" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
-      element.walletID +
-      ` " >Lưu</button>
+        element.walletID +
+        `')" data-bs-toggle="collapse" role="button" data-bs-target="#modalUpdate` +
+        element.walletID +
+        ` " >Lưu</button>
       </div>
 
   </div>
@@ -165,24 +178,22 @@ const createList = function (wallets, filterBySearchBox) {
     );
   });
 };
-  
-function updateWallet(walletID){
-  const updateWallet = {
-      name:String($(`#updateWalletName${walletID}`).val()),
-      color:String($(`#updateWalletColor${walletID}`).val()),
-      type:String($(`#updateWalletType${walletID}`).val()),
-    };
-  db.collection("wallets")
-  .doc(walletID)
-  .update(updateWallet)
-  .then(() => {
-        $(`#modal${walletID}`).modal("hide");
-        createList(wallets, filterBySearchBox);
-        window.location.reload();
-    })
-}
- 
 
+function updateWallet(walletID) {
+  const updateWallet = {
+    name: String($(`#updateWalletName${walletID}`).val()),
+    color: String($(`#updateWalletColor${walletID}`).val()),
+    type: String($(`#updateWalletType${walletID}`).val()),
+  };
+  db.collection("wallets")
+    .doc(walletID)
+    .update(updateWallet)
+    .then(() => {
+      $(`#modal${walletID}`).modal("hide");
+      createList(wallets, filterBySearchBox);
+      window.location.reload();
+    });
+}
 
 const deleteWallet = function (walletID) {
   db.collection("wallets")
@@ -199,7 +210,6 @@ const deleteWallet = function (walletID) {
       }
     });
 };
-
 
 $(".submit-new-wallet").click((event) => {
   event.preventDefault();
@@ -225,31 +235,34 @@ $(".submit-new-wallet").click((event) => {
     });
 });
 
-
 //Sign out etc...
-    const loginUser = document.getElementById('loginUser');
-    //Get current signed in user
-    firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
+const loginUser = document.getElementById("loginUser");
+//Get current signed in user
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        const email = user.email;
-        loginUser.innerHTML = `${email}`
-      } else {
-        location.href = "login.html";
-      }
-    });    
-       
-    let logoutBtn = document.getElementById("logout");
-    logoutBtn.addEventListener('click', logout);
+    const uid = user.uid;
+    const email = user.email;
+    loginUser.innerHTML = `${email}`;
+  } else {
+    location.href = "login.html";
+  }
+});
 
-    //signOut fucntion
-    function logout() {
-      firebase.auth().signOut().then(() => {
-        location.href = "login.html";
-     }).catch((error) => {
-    // An error happened.
-       alert(error); 
-      });
-    }
+let logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener("click", logout);
+
+//signOut fucntion
+async function logout() {
+  await firebase
+    .auth()
+    .signOut()
+    .catch((error) => {
+      // An error happened.
+      alert(error);
+    });
+
+  localStorage.removeItem("userID");
+  location.href = "login.html";
+}

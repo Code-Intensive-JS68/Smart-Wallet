@@ -4,7 +4,6 @@ import { updateTrans } from "./firebase.js";
 import { renderTransaction } from "./uitransaction.js";
 import { getTransaction } from "./firebase.js";
 
-
 const template = document.createElement("template");
 
 template.innerHTML = `
@@ -185,10 +184,10 @@ class Transaction extends HTMLElement {
     let del = this.shadowRoot.querySelector(".remove-transaction");
     del.addEventListener("click", async (e) => {
       e.stopPropagation();
-      let delId = this.getAttribute("walletID")
-      let delAmount =  this.getAmount();
+      let delId = this.getAttribute("walletID");
+      let delAmount = this.getAmount();
       let delType = this.getCategory().type;
-      console.log(delAmount,delType)
+      console.log(delAmount, delType);
       let check = confirm("Bạn muốn xóa giao dịch này không?");
       if (check) {
         await deleteTrans(this.getId());
@@ -223,7 +222,7 @@ class Transaction extends HTMLElement {
       let oldType = this.getCategory().type;
       let walletID = this.getAttribute("walletID");
       let updateType;
-      console.log(updateCate.value)
+      console.log(updateCate.value);
       if (
         updateCate.value == "wage" ||
         updateCate.value == "bank" ||
@@ -236,7 +235,7 @@ class Transaction extends HTMLElement {
       } else {
         updateType = "expense";
       }
-      console.log(updateType)
+      console.log(updateType);
 
       e.preventDefault();
       validateUpdate(
@@ -493,7 +492,7 @@ formTrans.addEventListener("submit", function (e) {
     0
   ).getTime();
 
-  console.log(cateSelect)
+  console.log(cateSelect);
   if (
     cateSelect == "wage" ||
     cateSelect == "bank" ||
@@ -507,12 +506,18 @@ formTrans.addEventListener("submit", function (e) {
     typeTrans = "expense";
   }
 
-  console.log(typeTrans)
-    let options = selectForWallet.options;
-    let walletID = options[options.selectedIndex].getAttribute("walletID");
+  console.log(typeTrans);
+  let options = selectForWallet.options;
+  let walletID = options[options.selectedIndex].getAttribute("walletID");
 
-  validateTrans(cateSelect, inputAmount, timeTrans, noteTrans, typeTrans, walletID);
-
+  validateTrans(
+    cateSelect,
+    inputAmount,
+    timeTrans,
+    noteTrans,
+    typeTrans,
+    walletID
+  );
 });
 
 //Validate trans
@@ -525,26 +530,26 @@ function validateTrans(
   walletID
 ) {
   if (cateSelect != "undefine") {
-      if(walletID != null){
-          if (inputAmount) {
-            modal.classList.remove("open");
-            insertTransaction(
-              cateSelect,
-              inputAmount,
-              timeTrans,
-              noteTrans,
-              typeTrans,
-              walletID,
-              userID
-            ).then((d) => {});
-            updateWalletBalance(walletID, inputAmount, typeTrans).then((d) => {})
-            formTrans.reset();
-          } else {
-            alert("Hãy nhập số tiền");
-          }
-      }else{
-          alert("Hãy chọn loại ví")
+    if (walletID != null) {
+      if (inputAmount) {
+        modal.classList.remove("open");
+        insertTransaction(
+          cateSelect,
+          inputAmount,
+          timeTrans,
+          noteTrans,
+          typeTrans,
+          walletID,
+          userID
+        ).then((d) => {});
+        updateWalletBalance(walletID, inputAmount, typeTrans).then((d) => {});
+        formTrans.reset();
+      } else {
+        alert("Hãy nhập số tiền");
       }
+    } else {
+      alert("Hãy chọn loại ví");
+    }
   } else {
     alert("hãy chọn loại giao dịch");
   }
@@ -552,11 +557,19 @@ function validateTrans(
 
 //Validate Update
 
-function validateUpdate(id, updateCate, updateAmount, updateType, walletID, oldAmount, oldType) {
+function validateUpdate(
+  id,
+  updateCate,
+  updateAmount,
+  updateType,
+  walletID,
+  oldAmount,
+  oldType
+) {
   if (updateCate != "undefine") {
     if (updateAmount) {
       modal.classList.remove("open");
-      balanceUpTrans(walletID, updateAmount, updateType,oldAmount,oldType);
+      balanceUpTrans(walletID, updateAmount, updateType, oldAmount, oldType);
       updateTrans(id, updateCate, updateAmount, updateType).then((d) => {
         window.location.reload();
       });
@@ -583,7 +596,7 @@ async function filterMonth() {
     let changes = sn.docChanges();
     TransUI.innerHTML = "";
     changes.forEach((change) => {
-      if(change.doc.data().userID == userID){
+      if (change.doc.data().userID == userID) {
         let data = change.doc.data();
         if (inputSearchMonth.value) {
           let month = inputSearchMonth.value.split("-")[1];
@@ -606,32 +619,31 @@ async function filterMonth() {
         }
       }
     });
-    });
+  });
 }
 
-//Chọn ví khi thêm giao dịch 
+//Chọn ví khi thêm giao dịch
 
 let selectForWallet = document.querySelector("#select-for-wallet");
 
 async function renderSelectForWallets() {
-    await db.collection("wallets").onSnapshot((sn) => {
-        let changes = sn.docChanges();
-        changes.forEach((change) => {
-          if(change.doc.data().userID == userID){
-            console.log(change.doc.data().userID)
-            let option = document.createElement("option");
-            option.text = change.doc.data().name;
-            option.setAttribute("walletID", change.doc.data().walletID);
-            selectForWallet.add(option);
-            console.log(userID)
-          }
-          })
-    })
+  await db.collection("wallets").onSnapshot((sn) => {
+    let changes = sn.docChanges();
+    changes.forEach((change) => {
+      if (change.doc.data().userID == userID) {
+        console.log(change.doc.data().userID);
+        let option = document.createElement("option");
+        option.text = change.doc.data().name;
+        option.setAttribute("walletID", change.doc.data().walletID);
+        selectForWallet.add(option);
+        console.log(userID);
+      }
+    });
+  });
 }
-renderSelectForWallets()
+renderSelectForWallets();
 
 // Tạo danh sách chọn ví
-
 
 let selectWallet = document.querySelector("#select-wallet");
 
@@ -639,13 +651,13 @@ async function renderSelectWallets() {
   await db.collection("wallets").onSnapshot((sn) => {
     let changes = sn.docChanges();
     changes.forEach((change) => {
-      if(change.doc.data().userID == userID){
-      let option = document.createElement("option");
-      option.text = change.doc.data().name;
-      option.setAttribute("walletID", change.doc.data().walletID);
-      selectWallet.add(option);
-    }
-      });
+      if (change.doc.data().userID == userID) {
+        let option = document.createElement("option");
+        option.text = change.doc.data().name;
+        option.setAttribute("walletID", change.doc.data().walletID);
+        selectWallet.add(option);
+      }
+    });
   });
 }
 
@@ -663,7 +675,7 @@ async function filterWallet(id) {
     let changes = sn.docChanges();
     TransUI.innerHTML = "";
     changes.forEach((change) => {
-      if(change.doc.data().userID == userID) {
+      if (change.doc.data().userID == userID) {
         let dataTrans = change.doc;
         if (dataTrans.data().walletID == id) {
           renderTransaction(dataTrans);
@@ -677,114 +689,126 @@ async function filterWallet(id) {
 // Get amount wallet by walletID
 
 async function getWalletBalance(walletID) {
-   let snapshot = await db.collection("wallets").get()
-   let balanceWallet;
-    snapshot.docs.forEach((doc) => {
-        if(doc.data().walletID == walletID) {
-           let balance = doc.data().amount
-            balanceWallet = balance
-        }
-    })
-    return balanceWallet
+  let snapshot = await db.collection("wallets").get();
+  let balanceWallet;
+  snapshot.docs.forEach((doc) => {
+    if (doc.data().walletID == walletID) {
+      let balance = doc.data().amount;
+      balanceWallet = balance;
+    }
+  });
+  return balanceWallet;
 }
 
 //Update wallet balance
 
- async function updateWalletBalance(walletID, amountTrans, typeTrans){
-   let balance = await getWalletBalance(walletID)
-     if(typeTrans == "revenue"){
-         amountTrans
-     } else {
-        amountTrans = -amountTrans
-     }
-     console.log(amountTrans)
-    await db.collection("wallets").doc(walletID).update({
-            amount: Number(balance) + Number(amountTrans)
-        })
+async function updateWalletBalance(walletID, amountTrans, typeTrans) {
+  let balance = await getWalletBalance(walletID);
+  if (typeTrans == "revenue") {
+    amountTrans;
+  } else {
+    amountTrans = -amountTrans;
+  }
+  console.log(amountTrans);
+  await db
+    .collection("wallets")
+    .doc(walletID)
+    .update({
+      amount: Number(balance) + Number(amountTrans),
+    });
 }
 
 // Update wallet balance after delele transaction
 
-async function balanceDelTrans(walletID, amount, type) { 
-  console.log(walletID, amount, type)
-  console.log("xoa")
+async function balanceDelTrans(walletID, amount, type) {
+  console.log(walletID, amount, type);
+  console.log("xoa");
   let balance = await getWalletBalance(walletID);
-  let amountReturn ;
-  if(type == "expense"){
+  let amountReturn;
+  if (type == "expense") {
     amountReturn = amount;
-} else {
-   amountReturn = -amount;
-}
-console.log("amounrreturn", amountReturn)
-await db.collection("wallets").doc(walletID).update({
-       amount: Number(balance) + Number(amountReturn)
-   })
-
+  } else {
+    amountReturn = -amount;
+  }
+  console.log("amounrreturn", amountReturn);
+  await db
+    .collection("wallets")
+    .doc(walletID)
+    .update({
+      amount: Number(balance) + Number(amountReturn),
+    });
 }
 
 // Update wallet balance after update transaction
 
-async function balanceUpTrans(walletID, newAmount, newType, oldAmount, oldType) {
-  console.log(walletID, newAmount, newType)
-  console.log("them")
-  let amountReturn ;
+async function balanceUpTrans(
+  walletID,
+  newAmount,
+  newType,
+  oldAmount,
+  oldType
+) {
+  console.log(walletID, newAmount, newType);
+  console.log("them");
+  let amountReturn;
   let balance = await getWalletBalance(walletID);
-  
-  if(oldType == "expense"){
+
+  if (oldType == "expense") {
     amountReturn = oldAmount;
   } else {
-   amountReturn = -oldAmount;
+    amountReturn = -oldAmount;
   }
 
-  if(newType == "revenue"){
-    newAmount
+  if (newType == "revenue") {
+    newAmount;
   } else {
-   newAmount = -newAmount
+    newAmount = -newAmount;
   }
 
-  console.log( oldType, newType);
+  console.log(oldType, newType);
 
-
-await db.collection("wallets")
-        .doc(walletID)
-        .update({
-       amount: Number(balance) + Number(newAmount) + Number(amountReturn)
-      })
+  await db
+    .collection("wallets")
+    .doc(walletID)
+    .update({
+      amount: Number(balance) + Number(newAmount) + Number(amountReturn),
+    });
 }
 
-
 //Sign out etc...
-const loginUser = document.getElementById('loginUser');
+const loginUser = document.getElementById("loginUser");
 //Get current signed in user
 firebase.auth().onAuthStateChanged((user) => {
-if (user) {
-// User is signed in, see docs for a list of available properties
-// https://firebase.google.com/docs/reference/js/firebase.User
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
     const email = user.email;
     console.log(uid);
-    loginUser.innerHTML = `${email}`
-  localStorage.setItem("userID", uid)
-
-    } else {
-      location.href = "login.html";
-    }
+    loginUser.innerHTML = `${email}`;
+    localStorage.setItem("userID", uid);
+  } else {
+    location.href = "login.html";
+  }
 });
-   
+
 let logoutBtn = document.getElementById("logout");
-logoutBtn.addEventListener('click', logout);
+logoutBtn.addEventListener("click", logout);
 
 //signOut fucntion
-function logout() {
-  firebase.auth().signOut().then(() => {
-    location.href = "login.html";
-    localStorage.removeItem("userID")
- }).catch((error) => {
-// An error happened.
-   alert(error); 
-  });
+async function logout() {
+  await firebase
+    .auth()
+    .signOut()
+    .catch((error) => {
+      // An error happened.
+      alert(error);
+    });
+
+  localStorage.removeItem("userID");
+  location.href = "login.html";
 }
 
 let userID = localStorage.getItem("userID");
 
-getTransaction(userID)
+getTransaction(userID);
