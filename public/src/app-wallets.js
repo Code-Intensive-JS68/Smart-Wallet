@@ -16,6 +16,7 @@ firebase.auth().onAuthStateChanged(() => {
 })
 
 
+
 const filterBySearchBox = {
   searchText: "",
 };
@@ -234,10 +235,11 @@ $(".submit-new-wallet").click((event) => {
     // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
         const email = user.email;
-        console.log(uid);
         loginUser.innerHTML = `${email}`
-        } 
-    });
+  
+
+      } 
+    });    
        
     let logoutBtn = document.getElementById("logout");
     logoutBtn.addEventListener('click', logout);
