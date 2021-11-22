@@ -31,7 +31,9 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
                 console.log(uid);
                 loginUser.innerHTML = `${email}`   
                 welcomeUser.innerHTML = `Welcome back, ${email}`      
-                } 
+                } else {
+                  location.href = "login.html";
+                }
             });
     
     let logoutBtn = document.getElementById("logout");
