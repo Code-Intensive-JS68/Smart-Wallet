@@ -123,7 +123,7 @@ const createList = function (wallets, filterBySearchBox) {
                         ví</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control-sm larger-box" placeholder="`+element.name+`"
-                      id="updateWalletName`+element.walletID+` value="`+element.name+`">
+                      id="updateWalletName`+element.walletID+`" value="`+element.name+`">
                     </div>
                   </div>
                   <div class="mb-2 col-4 ">
@@ -168,9 +168,9 @@ const createList = function (wallets, filterBySearchBox) {
   
 function updateWallet(walletID){
   const updateWallet = {
-      name: $(`#updateWalletName${walletID}`).val(),
-      color: $(`#updateWalletColor${walletID}`).val(),
-      type: $(`#updateWalletType${walletID}`).val(),
+      name:String($(`#updateWalletName${walletID}`).val()),
+      color:String($(`#updateWalletColor${walletID}`).val()),
+      type:String($(`#updateWalletType${walletID}`).val()),
     };
   db.collection("wallets")
   .doc(walletID)
@@ -211,7 +211,7 @@ $(".submit-new-wallet").click((event) => {
     walletID: walletID,
     color: $(".input-wallet-color").val(),
     type: $(".input-wallet-type").val(),
-    amount: $(".input-wallet-amount").val(),
+    amount: Number($(".input-wallet-amount").val()),
   };
   db.collection("wallets")
     .doc(walletID)
