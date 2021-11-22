@@ -631,6 +631,9 @@ async function renderSelectForWallets() {
     let changes = sn.docChanges();
     changes.forEach((change) => {
       if (change.doc.data().userID == userID) {
+        if (change.type === "modified") {
+          return;
+        }
         console.log(change.doc.data().userID);
         let option = document.createElement("option");
         option.text = change.doc.data().name;
@@ -652,6 +655,9 @@ async function renderSelectWallets() {
     let changes = sn.docChanges();
     changes.forEach((change) => {
       if (change.doc.data().userID == userID) {
+        if (change.type === "modified") {
+          return;
+        }
         let option = document.createElement("option");
         option.text = change.doc.data().name;
         option.setAttribute("walletID", change.doc.data().walletID);
