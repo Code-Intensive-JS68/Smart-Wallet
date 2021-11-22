@@ -764,7 +764,7 @@ if (user) {
     const email = user.email;
     console.log(uid);
     loginUser.innerHTML = `${email}`
-  localStorage.getItem("userID", uid)
+  localStorage.setItem("userID", uid)
 
     } 
 });

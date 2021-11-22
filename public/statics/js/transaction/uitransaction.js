@@ -4,7 +4,7 @@
     //Tạo thẻ
 
     let transaction = document.createElement("user-transaction");
-
+    console.log(data);
     transaction.setAttribute("id", doc.id);
     transaction.setAttribute("walletID", data.walletID)
     transaction.setAttribute("category", data.category);
