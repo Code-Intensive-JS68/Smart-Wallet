@@ -39,7 +39,7 @@ export async function deleteTrans(id) {
 export async function updateTrans(id, category, amount) {
     await db.collection("transaction").doc(id).update({
         category: category,
-        amount: amount
+        amount: Number(amount)
     })
 }
 
