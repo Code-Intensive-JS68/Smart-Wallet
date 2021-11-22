@@ -2,6 +2,8 @@ import { insertTransaction } from "./firebase.js";
 import { deleteTrans } from "./firebase.js";
 import { updateTrans } from "./firebase.js";
 import { renderTransaction } from "./uitransaction.js";
+import { getTransaction } from "./firebase.js";
+
 
 const template = document.createElement("template");
 
@@ -490,6 +492,8 @@ formTrans.addEventListener("submit", function (e) {
     0,
     0
   ).getTime();
+
+  console.log(cateSelect)
   if (
     cateSelect == "wage" ||
     cateSelect == "bank" ||
@@ -503,6 +507,7 @@ formTrans.addEventListener("submit", function (e) {
     typeTrans = "expense";
   }
 
+  console.log(typeTrans)
     let options = selectForWallet.options;
     let walletID = options[options.selectedIndex].getAttribute("walletID");
 
@@ -529,7 +534,8 @@ function validateTrans(
               timeTrans,
               noteTrans,
               typeTrans,
-              walletID
+              walletID,
+              userID
             ).then((d) => {});
             updateWalletBalance(walletID, inputAmount, typeTrans).then((d) => {})
             formTrans.reset();
@@ -551,7 +557,7 @@ function validateUpdate(id, updateCate, updateAmount, updateType, walletID, oldA
     if (updateAmount) {
       modal.classList.remove("open");
       balanceUpTrans(walletID, updateAmount, updateType,oldAmount,oldType);
-      updateTrans(id, updateCate, updateAmount).then((d) => {
+      updateTrans(id, updateCate, updateAmount, updateType).then((d) => {
         window.location.reload();
       });
     } else {
@@ -577,28 +583,30 @@ async function filterMonth() {
     let changes = sn.docChanges();
     TransUI.innerHTML = "";
     changes.forEach((change) => {
-      let data = change.doc.data();
-      if (inputSearchMonth.value) {
-        let month = inputSearchMonth.value.split("-")[1];
-        if (
-          data.date.toMillis() >=
-            moment()
-              .month(month - 1)
-              .startOf("month")
-              .valueOf() &&
-          data.date.toMillis() <=
-            moment()
-              .month(month - 1)
-              .endOf("month")
-              .valueOf()
-        ) {
-          renderTransaction(change.doc);
+      if(change.doc.data().userID == userID){
+        let data = change.doc.data();
+        if (inputSearchMonth.value) {
+          let month = inputSearchMonth.value.split("-")[1];
+          if (
+            data.date.toMillis() >=
+              moment()
+                .month(month - 1)
+                .startOf("month")
+                .valueOf() &&
+            data.date.toMillis() <=
+              moment()
+                .month(month - 1)
+                .endOf("month")
+                .valueOf()
+          ) {
+            renderTransaction(change.doc);
+          }
+          selectWallet.value = "Chọn ví";
+        } else {
         }
-        selectWallet.value = "Chọn ví";
-      } else {
       }
     });
-  });
+    });
 }
 
 //Chọn ví khi thêm giao dịch 
@@ -609,16 +617,21 @@ async function renderSelectForWallets() {
     await db.collection("wallets").onSnapshot((sn) => {
         let changes = sn.docChanges();
         changes.forEach((change) => {
+          if(change.doc.data().userID == userID){
+            console.log(change.doc.data().userID)
             let option = document.createElement("option");
             option.text = change.doc.data().name;
             option.setAttribute("walletID", change.doc.data().walletID);
             selectForWallet.add(option);
-        })
+            console.log(userID)
+          }
+          })
     })
 }
 renderSelectForWallets()
 
 // Tạo danh sách chọn ví
+
 
 let selectWallet = document.querySelector("#select-wallet");
 
@@ -626,11 +639,13 @@ async function renderSelectWallets() {
   await db.collection("wallets").onSnapshot((sn) => {
     let changes = sn.docChanges();
     changes.forEach((change) => {
+      if(change.doc.data().userID == userID){
       let option = document.createElement("option");
       option.text = change.doc.data().name;
       option.setAttribute("walletID", change.doc.data().walletID);
       selectWallet.add(option);
-    });
+    }
+      });
   });
 }
 
@@ -648,10 +663,12 @@ async function filterWallet(id) {
     let changes = sn.docChanges();
     TransUI.innerHTML = "";
     changes.forEach((change) => {
-      let dataTrans = change.doc;
-      if (dataTrans.data().walletID == id) {
-        renderTransaction(dataTrans);
-        inputSearchMonth.value = "";
+      if(change.doc.data().userID == userID) {
+        let dataTrans = change.doc;
+        if (dataTrans.data().walletID == id) {
+          renderTransaction(dataTrans);
+          inputSearchMonth.value = "";
+        }
       }
     });
   });
@@ -725,7 +742,8 @@ async function balanceUpTrans(walletID, newAmount, newType, oldAmount, oldType) 
    newAmount = -newAmount
   }
 
-  console.log( oldType, newType)
+  console.log( oldType, newType);
+
 
 await db.collection("wallets")
         .doc(walletID)
@@ -746,6 +764,8 @@ if (user) {
     const email = user.email;
     console.log(uid);
     loginUser.innerHTML = `${email}`
+  localStorage.getItem("userID", uid)
+
     } 
 });
    
@@ -756,8 +776,13 @@ logoutBtn.addEventListener('click', logout);
 function logout() {
   firebase.auth().signOut().then(() => {
     location.href = "login.html";
+    localStorage.removeItem("userID")
  }).catch((error) => {
 // An error happened.
    alert(error); 
   });
 }
+
+let userID = localStorage.getItem("userID");
+
+getTransaction(userID)
