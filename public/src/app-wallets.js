@@ -236,9 +236,9 @@ $(".submit-new-wallet").click((event) => {
         const uid = user.uid;
         const email = user.email;
         loginUser.innerHTML = `${email}`
-  
-
-      } 
+      } else {
+        location.href = "login.html";
+      }
     });    
        
     let logoutBtn = document.getElementById("logout");

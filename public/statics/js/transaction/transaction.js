@@ -764,9 +764,11 @@ if (user) {
     const email = user.email;
     console.log(uid);
     loginUser.innerHTML = `${email}`
-  localStorage.getItem("userID", uid)
+    localStorage.getItem("userID", uid)
 
-    } 
+    } else {
+      location.href = "login.html";
+    }
 });
    
 let logoutBtn = document.getElementById("logout");

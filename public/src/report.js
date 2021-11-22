@@ -9,7 +9,9 @@ if (user) {
     const email = user.email;
     console.log(uid);
     loginUser.innerHTML = `${email}`
-    } 
+    } else {
+      location.href = "login.html";
+    }
 });
    
 let logoutBtn = document.getElementById("logout");
