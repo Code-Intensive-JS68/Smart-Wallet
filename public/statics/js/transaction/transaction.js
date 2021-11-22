@@ -524,7 +524,6 @@ function validateTrans(
   typeTrans,
   walletID
 ) {
-    console.log(walletID)
   if (cateSelect != "undefine") {
       if(walletID != null){
           if (inputAmount) {
@@ -752,7 +751,6 @@ await db.collection("wallets")
        amount: Number(balance) + Number(newAmount) + Number(amountReturn)
       })
 }
-
 
 
 //Sign out etc...

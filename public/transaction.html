@@ -8,11 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="./statics/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./statics/css/general.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="./statics/js/bootstrap.bundle.js"></script>
+    <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+    
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <link rel="stylesheet" href="./statics/css/transaction.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -44,7 +50,7 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!" id="logout" >Đăng xuất</a></li>
+                    <li><a class="btn btn-secondary" id="logout" style="margin: 20px">Đăng xuất</a></li>
                 </ul>
             </li>
         </ul>
@@ -56,9 +62,9 @@
                   <div class="sb-sidenav-menu">
                       <div class="nav">
                           <div class="sb-sidenav-menu-heading">Mục chính</div>
-                          <a class="nav-link" href="index.html">
+                          <a class="nav-link nav-trans-link" href="index.html">
                               <div class="sb-nav-link-icon">
-                                  <i class="fas fa-tachometer-alt"></i>
+                                <i class="fas fa-tachometer-alt"></i>
                               </div>
                               Dashboard
                           </a>
@@ -68,9 +74,9 @@
                               </div>
                               Ví của tôi
                           </a>
-                          <a class="nav-link" href="transaction.html" style="color: white; pointer-events: none">
+                          <a class="nav-link" href="transaction.html">
                               <div class="sb-nav-link-icon">
-                                  <i class="fas fa-chart-area"></i>
+                                <i class="fas fa-book"></i>
                               </div>
                               Sổ giao dịch
                           </a>
@@ -85,11 +91,7 @@
                               data-bs-parent="#sidenavAccordion">
                           </div>
   
-                          <div class="sb-sidenav-menu-heading">Công cụ</div>
-                          <a class="nav-link" href="tables.html">
-                              <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                              Đổi tiền tệ
-                          </a>
+                          
                       </div>
                   </div>
                   <div class="sb-sidenav-footer">
@@ -109,7 +111,7 @@
         <div class="select-time">
             <div class="input-group mb-3">
                 <input type="month" id="input-month" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="search-month">Button</button>
+                <button class="btn btn-primary " type="button" id="search-month">Button</button>
               </div>
         </div>
           <div class="transaction">
@@ -174,8 +176,8 @@
                       <input type="number" class="modal-input input-amount" min="0" placeholder="Nhập số tiền?">
                       <label for="start">Ngày thu chi:</label>
                       <input class="modal-input" id ="select-time" type="date" id="start" name="trip-start"
-                            value="2021-11-22"
-                             min="2018-01-01" max="3000-01-01">
+                      value="2021-11-22"      
+                      min="2018-01-01" max="3000-01-01">
                       <label for="" class="modal-label">
                           Ghi chú
                       </label> 
@@ -295,6 +297,7 @@
     <script type ="module" src="./statics/js/transaction/uitransaction.js"></script>
     <script type="module" src="./statics/js/transaction/transaction.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="./statics/js/scripts.js"></script>
 </body>
 
 </html>
