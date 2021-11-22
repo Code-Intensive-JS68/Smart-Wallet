@@ -19,13 +19,15 @@ body {
     width: 100vw;
     height: 40px;
     position: relative;
+    display: flex;
+    justify-content: center;
 
 }
 
 .header-transaction {
     font-size: 30px;
     position: absolute;
-    left: 20%;
+    left: 600px;
     bottom: 5px;
 }
 
@@ -142,7 +144,7 @@ body {
 }
 /* Modal */
 
-.modal {
+.modal,.modal-info,.modal-update {
     position: fixed;
     top: 0;
     right: 0;
@@ -150,6 +152,7 @@ body {
     bottom: 0;
     background: rgb(0, 0, 0, 0.4);
     display: none;
+    z-index: 2;
 }
 
 .modal.open {
@@ -166,6 +169,7 @@ body {
     border-radius: 20px;
     animation: modalFadeIn ease 0.5s;
     overflow: hidden;
+    position: relative;
 }
 
 .modal-close {
@@ -188,7 +192,7 @@ body {
 
 .modal-header {
     background-color:  #009688;
-    height: 70px;
+    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,12 +219,13 @@ padding: 0.15px 16px;
 .modal-input{
     width: 100%;
     padding: 15px;
+    height: 40px;
     border: 1px solid #ccc!important;
 }
 
 .save-trans{
     background-color: #009688;
-    height: 54px;
+    height: 40px;
     width: 100%;
     border: none;
     color: #fff;
@@ -385,10 +390,10 @@ padding: 0.15px 16px;
 
 .info-note {
     padding-bottom: 30px;
-    font-size: 15px;
+    font-size: 18px;
     max-width:750px;
     font-weight: 500;
-    line-height: 20px;
+    line-height: 22px;
     max-height: 90px;
     overflow-y: scroll;
     display: block;
@@ -415,6 +420,7 @@ padding: 0.15px 16px;
     animation: modalFadeIn ease 0.5s;
     overflow: hidden;
     position: relative;
+    z-index: 9999;
 }
 
 .modal-update.open {
@@ -494,3 +500,26 @@ padding: 0.15px 16px;
     left: 75px;
 }
 
+/* Wallet */
+
+.wallet {
+    width: 400px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    position: fixed;
+    top: 65px;
+    left: 250px;
+    z-index: 1;
+}
+
+/* Select Time  */ 
+
+.select-time {
+    position: fixed;
+    top: 65px;
+    right: 100px;
+    z-index: 1;
+
+}

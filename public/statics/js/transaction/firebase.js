@@ -1,25 +1,29 @@
+
 import { renderTransaction } from "./uitransaction.js";
 
 async function getTransaction() {
-    await db.collection("transaction").onSnapshot(sn => {
+    await db.collection("transaction").onSnapshot((sn) => {
         let changes = sn.docChanges();
         changes.forEach((change) => {
+            if (change.type === "removed") {
+                return
+            }
             renderTransaction(change.doc)
-            console.log(change.type);
         });
     })
-}
+};
 
 getTransaction();
 
-export function insertTransaction(category, amount, date, note) {
+export function insertTransaction(category, amount, date, note, type, walletID) {
     return db.collection("transaction").add(
         {
             category : category,
-            amount : amount,
+            amount : Number(amount),
             date: firebase.firestore.Timestamp.fromDate(new Date(date)),
             note: note,
-            walletID: 1,
+            type: type,
+            walletID: walletID,
         }
     )
 }
@@ -38,8 +42,6 @@ export async function updateTrans(id, category, amount) {
         amount: amount
     })
 }
-
-// updateTrans("DlJTfTjZ9snr5RTFj9OV", "ắp đết");
 
 
 
