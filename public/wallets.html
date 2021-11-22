@@ -13,8 +13,13 @@
     <!-- <link href="css/styles.css" rel="stylesheet" /> -->
 
     <link href="./statics/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./statics/css/general.css">
     <link rel="stylesheet" href="./statics/css/style-wallets.css">
- 
+    
+    <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
         crossorigin="anonymous"></script>
     <script src="./statics/js/bootstrap.bundle.js"></script>
@@ -26,7 +31,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html"><strong>Smart Wallet</strong></a>
+        <a class="navbar-brand ps-3" href="index.html"><strong>Smart Wallet</strong><i class="fab fa-google-wallet mx-1"></i></a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
             <i class="fas fa-bars"></i>
@@ -52,7 +57,7 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="btn btn-dark" id="logout" style="margin: 20px">Đăng xuất</a></li>
+                    <li><a class="btn btn-secondary" id="logout" style="margin: 20px">Đăng xuất</a></li>
                 </ul>
             </li>
         </ul>
@@ -69,15 +74,15 @@
                             </div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="wallets.html" style="color: white; pointer-events: none">
+                        <a class="nav-link" href="wallets.html" >
                             <div class="sb-nav-link-icon">
-                                <i class="fas fa-chart-area"></i>
+                                <i class="fas fa-wallet"></i>
                             </div>
                             Ví của tôi
                         </a>
                         <a class="nav-link" href="transaction.html">
                             <div class="sb-nav-link-icon">
-                                <i class="fas fa-chart-area"></i>
+                                <i class="fas fa-book"></i>
                             </div>
                             Sổ giao dịch
                         </a>
@@ -92,11 +97,7 @@
                             data-bs-parent="#sidenavAccordion">
                         </div>
 
-                        <div class="sb-sidenav-menu-heading">Công cụ</div>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Đổi tiền tệ
-                        </a>
+                       
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -109,12 +110,12 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4" id="header-content">
-                    <div class="container-head">
+                    <div class="container-head custom-head">
                         <h1 class="mt-4">Ví của tôi</h1>
-                        <p class="lead">Hãy tạo ví trước và bắt đầu sử dụng</p>
+                        <p class="lead-custom">Hãy tạo ví trước và bắt đầu sử dụng</p>
                     </div>
-                    <div class="container-btn">
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
+                    <div class="container-btn custom-head-btn">
+                        <button type="button" class="btn btn-primary btn-lg shadow-sm font-weight-bold" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             Thêm ví mới
                         </button>
@@ -122,7 +123,7 @@
                 </div>
                 <div class="container-fluid px-4" id="container-content">
                     <div class="row justify-content-center " id="main-content-wallet">
-                        <div class="col-8 border border-light" id="wallet-column">
+                        <div class="col-8 " id="wallet-column">
                             <div class="wallet-card row">
                                 <div class="wallet-name col">
                                     <!-- <i class="fas fa-piggy-bank" style="color:tomato"></i> -->
@@ -136,7 +137,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 border border-light" id="read-column">
+                        <div class="col-4 " id="read-column">
                             <div class="wallet-read">
                                 <div class="search-bar">
                                     <div class="input-group">
@@ -168,13 +169,13 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="exampleModalLabel">Thêm ví</h6>
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Thêm ví</h6>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="" class="row" id="form-wallet">
                             <div class="mb-2 col-8">
-                                <label for="inputWalletName" class="col-sm-2 col-form-label-sm ">Tên
+                                <label for="inputWalletName" class="col-sm-2 col-form-label-sm font-weight-bold">Tên
                                     ví</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control-sm input-wallet-name larger-box" placeholder="Tên ví của bạn"
@@ -182,13 +183,13 @@
                                 </div>
                             </div>
                             <div class="mb-2 col-4 ">
-                                <label for="inputWalletColor" class="col col-form-label-sm">Màu sắc</label>
+                                <label for="inputWalletColor" class="col col-form-label-sm font-weight-bold">Màu sắc</label>
                                 <div class="col">
                                    <input type="color" class="form-select input-wallet-color" value="#1C4E80" id="inputWalletColor" >
                                 </div>
                             </div>
                             <div class="mb-2 ">
-                                <label for="inputWalletType" class="col col-form-label-sm">Loại</label>
+                                <label for="inputWalletType" class="col col-form-label-sm font-weight-bold">Loại</label>
                                 <div class="col">
                                     <select class="form-select form-select-sm input-wallet-type" aria-label="Default select example"
                                         id="inputWalletType">
@@ -201,14 +202,14 @@
                                 </div>
                             </div>
                             <div class="mb-2 col-8">
-                                <label for="inputWalletAmount" class="col-form-label-sm ">Số tiền hiện
+                                <label for="inputWalletAmount" class="col-form-label-sm font-weight-bold">Số tiền hiện
                                     có</label>
                                 <div class="col-sm-10">
                                     <input type="number" class="form-control-sm input-wallet-amount larger-box" placeholder="0" id="inputWalletAmount">
                                 </div>
                             </div>
                             <div class="mb-2 col-4 ">
-                                <label for="inputWalletCurrency" class="col col-form-label-sm">Tiền tệ</label>
+                                <label for="inputWalletCurrency" class="col col-form-label-sm font-weight-bold">Tiền tệ</label>
                                 <div class="col">
                                     <select class="form-select form-select-sm input-wallet-currency" aria-label="Default select example"
                                         id="inputWalletCurrency" disabled>

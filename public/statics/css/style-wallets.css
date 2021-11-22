@@ -1,6 +1,6 @@
 #header-content{
     display:flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .container-btn{
     display: flex;
@@ -10,7 +10,9 @@
     background-color: #eff0f2;
   }
   .wallet-card{
-    border: 1px solid white;
+    transition: transform 300ms ease-out;
+    border-radius: 10px;
+    border: 1px solid transparent;
     display: flex;
     background-color: white;
     align-items: center;
@@ -20,7 +22,7 @@
   }
   .wallet-card:hover{
     cursor: pointer;
-    border: 1px solid black;
+    transform: scale(1.02);
   }
   .search-bar{
     padding:0.5rem;
@@ -28,6 +30,7 @@
   }
   #read-column{
     min-height: 50vh;
+    border-left: 2px solid #fff;
   }
   a {
     text-decoration: none;
@@ -66,4 +69,10 @@
 }
 .modal-content .modal-header{
   border-bottom: none;
+}
+body{
+  font-family: 'Nunito', sans-serif;
+}
+.lead-custom{
+  color:#6c757d;
 }

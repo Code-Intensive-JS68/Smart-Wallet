@@ -57,12 +57,12 @@ firebase.auth().onAuthStateChanged(() => {
                     {
                       data: transactionSet,
                       backgroundColor: [
-                        "#267278",
-                        "#65338d",
-                        "#4770b3",
-                        "#d21f75",
-                        "#3b3689",
-                        "#50aed3",
+                        "#ff7592",
+                        "#1d699d",
+                        "#fcd0a1",
+                        "#564d65",
+                        "#2cda9d",
+                        "#0fa3b1",
                         "#48b24f",
                         "#e57438",
                         "#569dd2",

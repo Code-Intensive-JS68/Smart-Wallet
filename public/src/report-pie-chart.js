@@ -47,7 +47,12 @@ db.collection("transaction").where("walletID","==", walletSelect)
           labels: transactionCategory ,
           datasets: [{
             data: transactionSet,
-            backgroundColor: ['#267278', '#65338d', '#4770b3', '#d21f75', '#3b3689', '#50aed3', '#48b24f', '#e57438', '#569dd2', '#569d79', '#58595b', '#e4b031', '#84d2f4', '#cad93f', '#f5c8af', '#9ac483', '#9e9ea2'],
+            backgroundColor: ["#ff7592",
+            "#1d699d",
+            "#fcd0a1",
+            "#564d65",
+            "#2cda9d",
+            "#0fa3b1",'#267278', '#65338d', '#4770b3', '#d21f75', '#3b3689', '#50aed3', '#48b24f', '#e57438', '#569dd2', '#569d79', '#58595b', '#e4b031', '#84d2f4', '#cad93f', '#f5c8af', '#9ac483', '#9e9ea2'],
           }],
         },
         options: {
